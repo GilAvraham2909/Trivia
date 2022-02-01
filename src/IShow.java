@@ -1,3 +1,5 @@
 public interface IShow {
-    void show();
+    int mainMenu();
+    int difficultyLevel(Category category);
+    int askQuestion(Question question);
 }

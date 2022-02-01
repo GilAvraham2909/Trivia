@@ -1,16 +1,18 @@
 import java.util.List;
 
 public class QuestionsManager {
-    private String category;
-    private String difficulty;
+    private Category category;
+    private Difficulty difficulty;
     private List<Question> questionsList;
     private IParser parser;
 
-    public QuestionsManager(String category, String difficulty, List<Question> questionsList, IParser parser) {
+    public QuestionsManager(Category category, Difficulty difficulty) {
         this.category = category;
         this.difficulty = difficulty;
-        this.questionsList = questionsList;
-        this.parser = parser;
+    }
+
+    public List<Question> initializeQuestions() {
+        return parser.parse();
     }
 
     public void nextQuestion() {

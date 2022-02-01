@@ -2,9 +2,10 @@ public class Main {
 
     public static void main(String[] args)  //static method
     {
-        System.out.println("hello");
-        IShow display = new Console();
-        FlowManager flowManager = new FlowManager(display);
-        flowManager.gameManagement();
+        FlowManager flowManager = FlowManager.getInstance();
+        flowManager.start();
+//        while (!flowManager.gameFinished) {
+//
+//        }
     }
 }
