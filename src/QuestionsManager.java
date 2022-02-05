@@ -1,22 +1,26 @@
-import java.util.List;
-
 public class QuestionsManager {
     private Category category;
     private Difficulty difficulty;
-    private List<Question> questionsList;
-    private IParser parser;
+    private QuestionList questionsList;
+    private IParser parser = new MockParser();
 
     public QuestionsManager(Category category, Difficulty difficulty) {
         this.category = category;
         this.difficulty = difficulty;
+        questionsList = initializeQuestions();
     }
 
-    public List<Question> initializeQuestions() {
+    public QuestionList initializeQuestions() {
         return parser.parse();
     }
 
-    public void nextQuestion() {
+    public Question nextQuestion() {
+        return questionsList.nextQuestion();
+    }
 
+    public boolean isCorrectAnswer(int answerNum) {
+        String answer = questionsList.currentQuestion().getMap().get(answerNum);
+        return questionsList.currentQuestion().getCorrectAnswer().equals(answer);
     }
 
 }

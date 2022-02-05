@@ -1,8 +1,9 @@
 // singleton class
 public class FlowManager {
     public boolean gameFinished = false;
-    private GameManager gameManager = GameManager.getInstance();
     private IShow display = new Console();
+    private GameRoundManager gameRoundManager = new GameRoundManager(display);
+    private int currentTotalScore;
 
     private static FlowManager single_instance = null;
 
@@ -15,6 +16,7 @@ public class FlowManager {
     }
 
     public void start() {
+        //TODO get currentTotalScore here
         Category category = getCategory();
         if (category == null) {
             gameFinished = true;
@@ -29,9 +31,12 @@ public class FlowManager {
     }
 
     public void gameManagement(Category category, Difficulty difficulty) {
-        gameManager.startGame(category, difficulty);
+        int roundScore = gameRoundManager.startGameRound(category, difficulty);
+        this.currentTotalScore += roundScore;
+        // TODO save the new score in the DB.
     }
 
+    // TODO improve to a better implementation
     private Category getCategory() {
         int category = display.mainMenu();
         return switch (category) {
@@ -44,13 +49,18 @@ public class FlowManager {
         };
     }
 
+    // TODO improve to a better implementation
     private Difficulty getDifficulty(Category category) {
         return switch (display.difficultyLevel(category)) {
             case 1 -> Difficulty.Easy;
-            case 2 -> Difficulty.Medium;
+            case 2 -> Difficulty.Normal;
             case 3 -> Difficulty.Hard;
             case 4 -> null;
             default -> throw new IllegalStateException("Unexpected value: " + display.difficultyLevel(category));
         };
+    }
+
+    public void getScoreBoard() {
+        // TODO get the scoreboard from the ScoreboardReader
     }
 }
