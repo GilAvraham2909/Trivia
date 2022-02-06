@@ -1,4 +1,6 @@
 import static utils.Constants.*;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console implements IShow{
@@ -46,7 +48,7 @@ public class Console implements IShow{
                 } else {
                     System.out.println("please enter a number between 1 to " + endOfRange);
                 }
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("please enter a valid number.");
             }
         }
