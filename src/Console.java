@@ -38,7 +38,7 @@ public class Console implements IShow{
         return getIntFromUser(NUM_OF_OPTIONAL_ANSWERS);
     }
 
-    public int getIntFromUser(int endOfRange) {
+    public int getIntFromUser(int endOfRange) throws InputMismatchException {
         while (true) {
             try {
                 Scanner scanner = new Scanner(System.in);

@@ -37,7 +37,7 @@ public class FlowManager {
     }
 
     // TODO improve to a better implementation
-    private Category getCategory() {
+    private Category getCategory() throws IllegalStateException {
         int category = display.mainMenu();
         return switch (category) {
             case 1 -> Category.General;
@@ -50,7 +50,7 @@ public class FlowManager {
     }
 
     // TODO improve to a better implementation
-    private Difficulty getDifficulty(Category category) {
+    private Difficulty getDifficulty(Category category) throws IllegalStateException {
         return switch (display.difficultyLevel(category)) {
             case 1 -> Difficulty.Easy;
             case 2 -> Difficulty.Normal;
