@@ -1,3 +1,4 @@
+import static utils.Constants.*;
 import java.util.Scanner;
 
 public class Console implements IShow{
@@ -13,7 +14,7 @@ public class Console implements IShow{
         System.out.println("3 - Geography");
         System.out.println("4 - Entertainment");
         System.out.println("5 - Quit");
-        return getIntFromUser(Constants.NUM_OF_MAIN_MENU_OPTIONS);
+        return getIntFromUser(NUM_OF_MAIN_MENU_OPTIONS);
     }
 
     @Override
@@ -23,15 +24,16 @@ public class Console implements IShow{
         System.out.println("Pick a difficulty level:");
         System.out.println("-------------------------\n");
         System.out.println("1 - Easy");
-        System.out.println("2 - Medium");
+        System.out.println("2 - Normal");
         System.out.println("3 - Hard");
         System.out.println("4 - Back to Main Menu");
-        return getIntFromUser(Constants.NUM_OF_CATEGORY_OPTIONS);
+        return getIntFromUser(NUM_OF_CATEGORY_OPTIONS);
     }
 
     @Override
     public int askQuestion(Question question) {
-        return 0;
+        System.out.println(question.toString());
+        return getIntFromUser(NUM_OF_OPTIONAL_ANSWERS);
     }
 
     public int getIntFromUser(int endOfRange) {
