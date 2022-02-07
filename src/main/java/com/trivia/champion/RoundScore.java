@@ -1,3 +1,5 @@
+package com.trivia.champion;
+
 abstract class RoundScore {
     private int score;
 

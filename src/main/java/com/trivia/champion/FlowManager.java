@@ -1,3 +1,7 @@
+package com.trivia.champion;
+
+import java.io.IOException;
+
 // singleton class
 public class FlowManager {
     public boolean gameFinished = false;
@@ -15,7 +19,7 @@ public class FlowManager {
         return single_instance;
     }
 
-    public void start() {
+    public void start() throws IOException, InterruptedException {
         //TODO get currentTotalScore here
         Category category = getCategory();
         if (category == null) {
@@ -30,7 +34,7 @@ public class FlowManager {
         gameManagement(category, difficulty);
     }
 
-    public void gameManagement(Category category, Difficulty difficulty) {
+    public void gameManagement(Category category, Difficulty difficulty) throws IOException, InterruptedException {
         int roundScore = gameRoundManager.startGameRound(category, difficulty);
         this.currentTotalScore += roundScore;
         // TODO save the new score in the DB.

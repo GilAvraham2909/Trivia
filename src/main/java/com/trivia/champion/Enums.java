@@ -1,3 +1,5 @@
+package com.trivia.champion;
+
 enum Category {
     General,
     Science,

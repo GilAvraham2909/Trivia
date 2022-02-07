@@ -1,3 +1,5 @@
+package com.trivia.champion;
+
 public class RoundScoreFactory {
 
     public RoundScore makeRoundScore(Difficulty difficulty) {
