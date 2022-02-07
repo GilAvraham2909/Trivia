@@ -1,6 +1,8 @@
+package com.trivia.champion;
+
 import java.util.ArrayList;
 import java.util.List;
-import static utils.Constants.*;
+import static com.trivia.champion.utils.Constants.*;
 
 public class MockParser implements IParser{
     private List<String> incorrectAnswers = new ArrayList<>();

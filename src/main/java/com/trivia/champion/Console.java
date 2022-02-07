@@ -1,4 +1,6 @@
-import static utils.Constants.*;
+package com.trivia.champion;
+
+import static com.trivia.champion.utils.Constants.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

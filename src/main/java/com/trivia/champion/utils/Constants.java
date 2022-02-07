@@ -1,4 +1,4 @@
-package utils;
+package com.trivia.champion.utils;
 
 public final class Constants  {
     public static final int NUM_OF_MAIN_MENU_OPTIONS = 5;

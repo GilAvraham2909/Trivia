@@ -1,4 +1,8 @@
-import static utils.Constants.NUM_OF_QUESTIONS;
+package com.trivia.champion;
+
+import java.io.IOException;
+
+import static com.trivia.champion.utils.Constants.NUM_OF_QUESTIONS;
 
 public class GameRoundManager {
     private boolean roundFinished = false;
@@ -9,7 +13,7 @@ public class GameRoundManager {
         this.display = display;
     }
 
-    public int startGameRound(Category category, Difficulty difficulty) {
+    public int startGameRound(Category category, Difficulty difficulty) throws IOException, InterruptedException {
         questionsManager = new QuestionsManager(category, difficulty);
         RoundScoreFactory roundScoreFactory = new RoundScoreFactory();
         RoundScore score = roundScoreFactory.makeRoundScore(difficulty);

@@ -1,16 +1,21 @@
+package com.trivia.champion;
+
+import java.io.IOException;
+
 public class QuestionsManager {
     private Category category;
     private Difficulty difficulty;
     private QuestionList questionsList;
-    private IParser parser = new MockParser();
+//    private IParser parser = new MockParser();
+    private IParser parser = new ApiParser();
 
-    public QuestionsManager(Category category, Difficulty difficulty) {
+    public QuestionsManager(Category category, Difficulty difficulty) throws IOException, InterruptedException {
         this.category = category;
         this.difficulty = difficulty;
         questionsList = initializeQuestions();
     }
 
-    public QuestionList initializeQuestions() {
+    public QuestionList initializeQuestions() throws IOException, InterruptedException {
         return parser.parse();
     }
 
