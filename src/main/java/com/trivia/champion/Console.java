@@ -14,10 +14,11 @@ public class Console implements IShow{
         System.out.println("Pick a category:");
         System.out.println("-------------------------\n");
         System.out.println("1 - General");
-        System.out.println("2 - Science");
+        System.out.println("2 - Sports");
         System.out.println("3 - Geography");
-        System.out.println("4 - Entertainment");
-        System.out.println("5 - Quit");
+        System.out.println("4 - History");
+        System.out.println("5 - Celebrities");
+        System.out.println("6 - Quit");
         return getIntFromUser(NUM_OF_MAIN_MENU_OPTIONS);
     }
 

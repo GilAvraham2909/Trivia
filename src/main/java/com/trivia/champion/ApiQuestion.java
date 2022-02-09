@@ -1,5 +1,8 @@
 package com.trivia.champion;
 
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 public class ApiQuestion {
@@ -7,7 +10,7 @@ public class ApiQuestion {
     private List<String> incorrect_answers;
 
     public String getCategory() {
-        return category;
+        return new String(Base64.getDecoder().decode(category), StandardCharsets.UTF_8);
     }
 
     public void setCategory(String category) {
@@ -15,7 +18,7 @@ public class ApiQuestion {
     }
 
     public String getType() {
-        return type;
+        return new String(Base64.getDecoder().decode(type), StandardCharsets.UTF_8);
     }
 
     public void setType(String type) {
@@ -23,7 +26,7 @@ public class ApiQuestion {
     }
 
     public String getDifficulty() {
-        return difficulty;
+        return new String(Base64.getDecoder().decode(difficulty), StandardCharsets.UTF_8);
     }
 
     public void setDifficulty(String difficulty) {
@@ -31,7 +34,7 @@ public class ApiQuestion {
     }
 
     public String getQuestion() {
-        return question;
+        return new String(Base64.getDecoder().decode(question), StandardCharsets.UTF_8);
     }
 
     public void setQuestion(String question) {
@@ -39,7 +42,7 @@ public class ApiQuestion {
     }
 
     public String getCorrect_answer() {
-        return correct_answer;
+        return new String(Base64.getDecoder().decode(correct_answer), StandardCharsets.UTF_8);
     }
 
     public void setCorrect_answer(String correct_answer) {
@@ -47,7 +50,11 @@ public class ApiQuestion {
     }
 
     public List<String> getIncorrect_answers() {
-        return incorrect_answers;
+        List<String> list = new ArrayList<>();
+        for(int i = 0; i < 3; i++) {
+            list.add(new String(Base64.getDecoder().decode(incorrect_answers.get(i)), StandardCharsets.UTF_8));
+        }
+        return list;
     }
 
     public void setIncorrect_answers(List<String> incorrect_answers) {

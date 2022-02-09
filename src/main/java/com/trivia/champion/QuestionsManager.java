@@ -7,11 +7,12 @@ public class QuestionsManager {
     private Difficulty difficulty;
     private QuestionList questionsList;
 //    private IParser parser = new MockParser();
-    private IParser parser = new ApiParser();
+    private IParser parser;
 
     public QuestionsManager(Category category, Difficulty difficulty) throws IOException, InterruptedException {
         this.category = category;
         this.difficulty = difficulty;
+        parser = new ApiParser(category, difficulty);
         questionsList = initializeQuestions();
     }
 
