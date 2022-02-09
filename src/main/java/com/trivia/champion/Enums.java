@@ -1,10 +1,11 @@
 package com.trivia.champion;
 
 enum Category {
-    General,
-    Science,
-    Geography,
-    Entertainment
+    GENERAL,
+    SPORTS,
+    GEOGRAPHY,
+    HISTORY,
+    CELEBRITIES
 }
 
 enum Difficulty {

@@ -44,11 +44,12 @@ public class FlowManager {
     private Category getCategory() throws IllegalStateException {
         int category = display.mainMenu();
         return switch (category) {
-            case 1 -> Category.General;
-            case 2 -> Category.Science;
-            case 3 -> Category.Geography;
-            case 4 -> Category.Entertainment;
-            case 5 -> null;
+            case 1 -> Category.GENERAL;
+            case 2 -> Category.SPORTS;
+            case 3 -> Category.GEOGRAPHY;
+            case 4 -> Category.HISTORY;
+            case 5 -> Category.CELEBRITIES;
+            case 6 -> null;
             default -> throw new IllegalStateException("Unexpected value: " + category);
         };
     }
