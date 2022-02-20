@@ -6,6 +6,6 @@ public class EasyRoundScore extends RoundScore {
     @Override
     public void addPoints() {
         int currentScore = getScore();
-        setScore(currentScore + Easy_QUESTION_SCORE);
+        setScore(currentScore + EASY_QUESTION_SCORE);
     }
 }
