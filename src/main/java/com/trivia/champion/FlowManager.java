@@ -1,6 +1,8 @@
 package com.trivia.champion;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Map;
 
 // singleton class
 public class FlowManager {
@@ -8,19 +10,23 @@ public class FlowManager {
     private IShow display = new Console();
     private GameRoundManager gameRoundManager = new GameRoundManager(display);
     private int currentTotalScore;
+    private SqliteDB db = new SqliteDB();
 
     private static FlowManager single_instance = null;
 
-    private FlowManager() {}
+    private FlowManager() throws SQLException {}
 
-    public static FlowManager getInstance() {
+    public static FlowManager getInstance() throws SQLException {
         if (single_instance == null)
             single_instance = new FlowManager();
         return single_instance;
     }
 
-    public void start() throws IOException, InterruptedException {
+    public void start() throws IOException, InterruptedException, SQLException {
         //TODO get currentTotalScore here
+        Map<String, String> userMap = display.login();
+        User user = db.getUser(userMap);
+        System.out.println("Hi " +user.getName() + " CURRENT score is: " + user.getScore());
         Category category = getCategory();
         if (category == null) {
             gameFinished = true;
@@ -31,12 +37,14 @@ public class FlowManager {
             gameFinished = true;
             return;
         }
-        gameManagement(category, difficulty);
+        gameManagement(category, difficulty,user);
     }
 
-    public void gameManagement(Category category, Difficulty difficulty) throws IOException, InterruptedException {
+    public void gameManagement(Category category, Difficulty difficulty, User user) throws IOException, InterruptedException, SQLException {
         int roundScore = gameRoundManager.startGameRound(category, difficulty);
         this.currentTotalScore += roundScore;
+        int userScore = db.updateScore(user, this.currentTotalScore);
+        System.out.println("Your'e TOTAL score is: " + userScore);
         // TODO save the new score in the DB.
     }
 

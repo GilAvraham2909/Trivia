@@ -2,10 +2,12 @@ package com.trivia.champion;
 
 import static com.trivia.champion.utils.Constants.*;
 
+import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
 
-public class Console implements IShow{
+public class Console implements IShow {
 
     @Override
     public int mainMenu() {
@@ -20,6 +22,21 @@ public class Console implements IShow{
         System.out.println("5 - Celebrities");
         System.out.println("6 - Quit");
         return getIntFromUser(NUM_OF_MAIN_MENU_OPTIONS);
+    }
+
+    @Override
+    public Map<String, String> login() {
+        Map<String, String> nameMap = new HashMap<String, String>();
+        System.out.println("Welcome To TRIVIA CHAMPION!");
+        System.out.println("-------------------------\n");
+        System.out.println("Enter your user name & password:");
+        System.out.println("Note: if you do not have a user it will create one.");
+        System.out.println("-------------------------\n");
+        System.out.println("user:");
+        nameMap.put("userName", getStringFromUser());
+        System.out.println("password:");
+        nameMap.put("userPassword", getStringFromUser());
+        return nameMap;
     }
 
     @Override
@@ -54,6 +71,14 @@ public class Console implements IShow{
             } catch (InputMismatchException e) {
                 System.out.println("please enter a valid number.");
             }
+        }
+    }
+
+    public String getStringFromUser() {
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            String name = scanner.next();
+            return name;
         }
     }
 
