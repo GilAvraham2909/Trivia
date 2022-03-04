@@ -1,7 +1,13 @@
-package com.trivia.champion;
+package com.trivia.champion.parsers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trivia.champion.ApiQuestion;
+import com.trivia.champion.ApiResponse;
+import com.trivia.champion.Question;
+import com.trivia.champion.QuestionList;
+import com.trivia.champion.enums.Category;
+import com.trivia.champion.enums.Difficulty;
 
 import java.io.IOException;
 import java.net.URI;
@@ -66,7 +72,7 @@ public class ApiParser implements IParser {
             case SPORTS -> "21";
             case GEOGRAPHY -> "22";
             case HISTORY -> "23";
-            case CELEBRITIES -> "26";
+            case ANIMALS -> "27";
         };
     }
 

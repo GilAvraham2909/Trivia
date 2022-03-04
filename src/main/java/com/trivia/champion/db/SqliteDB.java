@@ -1,5 +1,6 @@
-package com.trivia.champion;
+package com.trivia.champion.db;
 
+import com.trivia.champion.User;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
@@ -38,13 +39,12 @@ public class SqliteDB {
         Statement statement = this.connection.createStatement();
         statement.execute(sql);
         ResultSet result = statement.getResultSet();
-        while (result.next()) {
-            String name = result.getString("name");
-            String pass = result.getString("password");
-            int score = result.getInt("score");
-            return new User(name, pass, score);
-        }
-        return null;
+        result.next();
+        String name = result.getString("name");
+        String pass = result.getString("password");
+        int score = result.getInt("score");
+        return new User(name, pass, score);
+
     }
 
     public User addToDB(String name, String pass) throws SQLException {

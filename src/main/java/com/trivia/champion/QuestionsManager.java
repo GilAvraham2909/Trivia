@@ -1,5 +1,10 @@
 package com.trivia.champion;
 
+import com.trivia.champion.enums.Category;
+import com.trivia.champion.enums.Difficulty;
+import com.trivia.champion.parsers.ApiParser;
+import com.trivia.champion.parsers.IParser;
+
 import java.io.IOException;
 
 public class QuestionsManager {

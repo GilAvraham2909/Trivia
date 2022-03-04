@@ -1,4 +1,7 @@
-package com.trivia.champion;
+package com.trivia.champion.parsers;
+
+import com.trivia.champion.Question;
+import com.trivia.champion.QuestionList;
 
 import java.util.ArrayList;
 import java.util.List;

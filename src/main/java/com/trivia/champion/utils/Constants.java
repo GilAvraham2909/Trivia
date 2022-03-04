@@ -1,7 +1,7 @@
 package com.trivia.champion.utils;
 
 public final class Constants  {
-    public static final int NUM_OF_MAIN_MENU_OPTIONS = 5;
+    public static final int NUM_OF_MAIN_MENU_OPTIONS = 6;
     public static final int NUM_OF_CATEGORY_OPTIONS = 5;
     public static final int NUM_OF_QUESTIONS = 10;
     public static final int NUM_OF_OPTIONAL_ANSWERS = 4;

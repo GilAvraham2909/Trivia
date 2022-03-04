@@ -1,5 +1,7 @@
 package com.trivia.champion;
 
+import com.trivia.champion.enums.Difficulty;
+
 public class RoundScoreFactory {
 
     public RoundScore makeRoundScore(Difficulty difficulty) {

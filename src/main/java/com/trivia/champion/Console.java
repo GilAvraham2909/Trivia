@@ -1,5 +1,7 @@
 package com.trivia.champion;
 
+import com.trivia.champion.enums.Category;
+
 import static com.trivia.champion.utils.Constants.*;
 
 import java.util.HashMap;
@@ -19,14 +21,14 @@ public class Console implements IShow {
         System.out.println("2 - Sports");
         System.out.println("3 - Geography");
         System.out.println("4 - History");
-        System.out.println("5 - Celebrities");
+        System.out.println("5 - Animals");
         System.out.println("6 - Quit");
         return getIntFromUser(NUM_OF_MAIN_MENU_OPTIONS);
     }
 
     @Override
     public Map<String, String> login() {
-        Map<String, String> nameMap = new HashMap<String, String>();
+        Map<String, String> nameMap = new HashMap<>();
         System.out.println("Welcome To TRIVIA CHAMPION!");
         System.out.println("-------------------------\n");
         System.out.println("Enter your user name & password:");
@@ -75,11 +77,9 @@ public class Console implements IShow {
     }
 
     public String getStringFromUser() {
-        while (true) {
-            Scanner scanner = new Scanner(System.in);
-            String name = scanner.next();
-            return name;
-        }
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.next();
+        return name;
     }
 
 }

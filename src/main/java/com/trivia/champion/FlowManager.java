@@ -1,5 +1,9 @@
 package com.trivia.champion;
 
+import com.trivia.champion.db.SqliteDB;
+import com.trivia.champion.enums.Category;
+import com.trivia.champion.enums.Difficulty;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
@@ -7,6 +11,9 @@ import java.util.Map;
 // singleton class
 public class FlowManager {
     public boolean gameFinished = false;
+    //new UiAdapter
+
+    //TODO private IShow display = uiAdapter(CONSOLE);
     private IShow display = new Console();
     private GameRoundManager gameRoundManager = new GameRoundManager(display);
     private int currentTotalScore;
@@ -23,7 +30,6 @@ public class FlowManager {
     }
 
     public void start() throws IOException, InterruptedException, SQLException {
-        //TODO get currentTotalScore here
         Map<String, String> userMap = display.login();
         User user = db.getUser(userMap);
         System.out.println("Hi " +user.getName() + " CURRENT score is: " + user.getScore());
@@ -37,15 +43,15 @@ public class FlowManager {
             gameFinished = true;
             return;
         }
-        gameManagement(category, difficulty,user);
+        gameManagement(category, difficulty, user);
     }
 
     public void gameManagement(Category category, Difficulty difficulty, User user) throws IOException, InterruptedException, SQLException {
         int roundScore = gameRoundManager.startGameRound(category, difficulty);
         this.currentTotalScore += roundScore;
+        // save the new score in the DB
         int userScore = db.updateScore(user, this.currentTotalScore);
         System.out.println("Your'e TOTAL score is: " + userScore);
-        // TODO save the new score in the DB.
     }
 
     // TODO improve to a better implementation
@@ -56,7 +62,7 @@ public class FlowManager {
             case 2 -> Category.SPORTS;
             case 3 -> Category.GEOGRAPHY;
             case 4 -> Category.HISTORY;
-            case 5 -> Category.CELEBRITIES;
+            case 5 -> Category.ANIMALS;
             case 6 -> null;
             default -> throw new IllegalStateException("Unexpected value: " + category);
         };

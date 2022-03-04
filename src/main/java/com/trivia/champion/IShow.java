@@ -1,5 +1,7 @@
 package com.trivia.champion;
 
+import com.trivia.champion.enums.Category;
+
 import java.util.Map;
 
 public interface IShow {

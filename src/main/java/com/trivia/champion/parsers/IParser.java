@@ -1,4 +1,6 @@
-package com.trivia.champion;
+package com.trivia.champion.parsers;
+
+import com.trivia.champion.QuestionList;
 
 import java.io.IOException;
 

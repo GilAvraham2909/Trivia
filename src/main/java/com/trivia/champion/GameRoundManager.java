@@ -1,5 +1,8 @@
 package com.trivia.champion;
 
+import com.trivia.champion.enums.Category;
+import com.trivia.champion.enums.Difficulty;
+
 import java.io.IOException;
 
 import static com.trivia.champion.utils.Constants.NUM_OF_QUESTIONS;
