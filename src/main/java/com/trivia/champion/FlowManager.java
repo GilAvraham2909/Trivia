@@ -21,7 +21,8 @@ public class FlowManager {
 
     private static FlowManager single_instance = null;
 
-    private FlowManager() throws SQLException {}
+    private FlowManager() throws SQLException {
+    }
 
     public static FlowManager getInstance() throws SQLException {
         if (single_instance == null)
@@ -30,9 +31,8 @@ public class FlowManager {
     }
 
     public void start() throws IOException, InterruptedException, SQLException {
-        Map<String, String> userMap = display.login();
-        User user = db.getUser(userMap);
-        System.out.println("Hi " +user.getName() + " CURRENT score is: " + user.getScore());
+        User user = login();
+        System.out.println("Hi " + user.getName() + " CURRENT score is: " + user.getScore());
         Category category = getCategory();
         if (category == null) {
             gameFinished = true;
@@ -79,7 +79,46 @@ public class FlowManager {
         };
     }
 
-    public void getScoreBoard() {
-        // TODO get the scoreboard from the ScoreboardReader
+    public void getScoreBoard() throws SQLException {
+        display.scoreBord(this.db.getTop10());
+    }
+
+    public User login() throws SQLException {
+        int userType = display.welcomePage();
+        User user = null;
+        switch (userType) {
+            case 1: {
+                while (user == null) {
+                    String registeredUsername = display.getUserName();
+                    user = this.db.getUserFromDB(registeredUsername);
+                    if (user != null) {
+                        break;
+                    }
+                    userType = display.couldNotFindUser();
+                    if (userType == 2) {
+                        break;
+                    }
+                }
+                if (user != null) {
+                    String registeredPassword = display.getUserPassword();
+                    while (!this.db.validateUser(user, registeredPassword)) {
+                        display.incorrectPassword();
+                        registeredPassword = display.getUserPassword();
+                    }
+                    return user;
+                }
+            }
+            case 2: {
+                String newUsername = display.getUserName();
+                while (this.db.getUserFromDB(newUsername) != null) {
+                    display.existingUser();
+                    newUsername = display.getUserName();
+                }
+                String newPassword = display.getUserPassword();
+                user = this.db.addToDB(newUsername, newPassword);
+                break;
+            }
+        }
+        return user;
     }
 }

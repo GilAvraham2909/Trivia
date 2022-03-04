@@ -4,10 +4,7 @@ import com.trivia.champion.enums.Category;
 
 import static com.trivia.champion.utils.Constants.*;
 
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Console implements IShow {
 
@@ -25,20 +22,52 @@ public class Console implements IShow {
         System.out.println("6 - Quit");
         return getIntFromUser(NUM_OF_MAIN_MENU_OPTIONS);
     }
-
     @Override
-    public Map<String, String> login() {
-        Map<String, String> nameMap = new HashMap<>();
+    public int welcomePage(){
         System.out.println("Welcome To TRIVIA CHAMPION!");
         System.out.println("-------------------------\n");
-        System.out.println("Enter your user name & password:");
-        System.out.println("Note: if you do not have a user it will create one.");
+        System.out.println("1 - login");
+        System.out.println("2 - register");
+        return getIntFromUser(2);
+    }
+
+    @Override
+    public String getUserName(){
+        System.out.println("enter username:");
+        return getStringFromUser();
+
+    }
+
+    @Override
+    public String getUserPassword(){
+        System.out.println("enter Password:");
+        return getStringFromUser();
+    }
+
+    @Override
+    public void existingUser(){
+        System.out.println("there is a user with that username.");
         System.out.println("-------------------------\n");
-        System.out.println("user:");
-        nameMap.put("userName", getStringFromUser());
-        System.out.println("password:");
-        nameMap.put("userPassword", getStringFromUser());
-        return nameMap;
+    }
+
+    @Override
+    public int couldNotFindUser(){
+        System.out.println("could not fine a user with that username.");
+        System.out.println("-------------------------\n");
+        System.out.println("1 - try again");
+        System.out.println("2 - register now");
+        return getIntFromUser(2);
+    }
+
+    @Override
+    public void incorrectPassword(){
+        System.out.println("wrong password password, please try again.");
+        System.out.println("-------------------------\n");
+    }
+
+    @Override
+    public void scoreBord(List<User> top10Users){
+        // TODO: 04/03/2022  add implementation.
     }
 
     @Override
@@ -78,8 +107,8 @@ public class Console implements IShow {
 
     public String getStringFromUser() {
         Scanner scanner = new Scanner(System.in);
-        String name = scanner.next();
-        return name;
+        return scanner.next();
+
     }
 
 }

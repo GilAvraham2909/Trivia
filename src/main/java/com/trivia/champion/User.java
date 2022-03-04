@@ -11,6 +11,11 @@ public class User {
         this.score = score;
     }
 
+    public User(String name, int score) {
+        this.name = name;
+        this.score = score;
+    }
+
     public String getName() {
         return name;
     }
