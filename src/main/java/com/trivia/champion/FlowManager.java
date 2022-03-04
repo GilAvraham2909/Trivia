@@ -15,7 +15,7 @@ public class FlowManager {
 
     //TODO private IShow display = uiAdapter(CONSOLE);
     private IShow display = new Console();
-    private GameRoundManager gameRoundManager = new GameRoundManager(display);
+    private RoundManager roundManager = new RoundManager(display);
     private int currentTotalScore;
     private SqliteDB db = new SqliteDB();
 
@@ -47,7 +47,7 @@ public class FlowManager {
     }
 
     public void gameManagement(Category category, Difficulty difficulty, User user) throws IOException, InterruptedException, SQLException {
-        int roundScore = gameRoundManager.startGameRound(category, difficulty);
+        int roundScore = roundManager.startRound(category, difficulty);
         this.currentTotalScore += roundScore;
         // save the new score in the DB
         int userScore = db.updateScore(user, this.currentTotalScore);

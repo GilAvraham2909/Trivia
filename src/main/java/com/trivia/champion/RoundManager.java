@@ -7,16 +7,16 @@ import java.io.IOException;
 
 import static com.trivia.champion.utils.Constants.NUM_OF_QUESTIONS;
 
-public class GameRoundManager {
+public class RoundManager {
     private boolean roundFinished = false;
     private QuestionsManager questionsManager;
     private IShow display;
 
-    public GameRoundManager(IShow display) {
+    public RoundManager(IShow display) {
         this.display = display;
     }
 
-    public int startGameRound(Category category, Difficulty difficulty) throws IOException, InterruptedException {
+    public int startRound(Category category, Difficulty difficulty) throws IOException, InterruptedException {
         questionsManager = new QuestionsManager(category, difficulty);
         RoundScoreFactory roundScoreFactory = new RoundScoreFactory();
         RoundScore score = roundScoreFactory.makeRoundScore(difficulty);
