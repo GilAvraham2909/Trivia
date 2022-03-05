@@ -10,7 +10,7 @@ import static com.trivia.champion.utils.Constants.*;
 
 // singleton class
 public class FlowManager {
-    public boolean gameFinished = false;
+    public boolean quitGame = false;
     //new UiAdapter
 
     //TODO private IShow display = uiAdapter(CONSOLE);
@@ -30,25 +30,24 @@ public class FlowManager {
         return single_instance;
     }
 
+
     public void start() throws IOException, InterruptedException, SQLException {
         User user = login();
         display.greetUser(user.getName(),user.getScore());
-//        CategoryEnum categoryEnum = getCategory();
-//        if (categoryEnum == null) {
-//            gameFinished = true;
-//            return;
-//        }
-        String category = getCategory();
-        if (category == null) {
-            gameFinished = true;
-            return;
+
+        while (!quitGame) {
+            String category = getCategory();
+            if (category == null) {
+                quitGame = true;
+                return;
+            }
+            Difficulty difficulty = getDifficulty(category);
+            if (difficulty == null) {
+                quitGame = true;
+                return;
+            }
+            gameManagement(category, difficulty, user);
         }
-        Difficulty difficulty = getDifficulty(category);
-        if (difficulty == null) {
-            gameFinished = true;
-            return;
-        }
-        gameManagement(category, difficulty, user);
     }
 
     public void gameManagement(String category, Difficulty difficulty, User user) throws IOException, InterruptedException, SQLException {

@@ -8,7 +8,6 @@ import static com.trivia.champion.utils.Constants.NUM_OF_OPTIONAL_ANSWERS;
 import static com.trivia.champion.utils.Constants.NUM_OF_QUESTIONS;
 
 public class RoundManager {
-    private boolean roundFinished = false;
     private QuestionsManager questionsManager;
     private IPlayerUi display = PlayerConsole.getInstance();
     private InputGetter inputGetter = new InputGetter();
