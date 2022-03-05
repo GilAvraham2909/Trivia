@@ -14,12 +14,13 @@ import java.util.List;
 
 import static com.trivia.champion.utils.Constants.*;
 
-public class QuestionsApiParser implements IParser {
+public class ApiQuestionsParser implements IQuestionsParser {
     private HttpClient client;
     private String category;
     private Difficulty difficulty;
+    private IPlayerUi display = PlayerConsole.getInstance();
 
-    public QuestionsApiParser(String category, Difficulty difficulty) {
+    public ApiQuestionsParser(String category, Difficulty difficulty) {
         this.client = HttpClient.newHttpClient();
         this.category = category;
         this.difficulty = difficulty;
@@ -29,6 +30,10 @@ public class QuestionsApiParser implements IParser {
     public QuestionList parse() throws IOException, InterruptedException {
         QuestionList questionList = new QuestionList();
         QuestionsApiResponse questionsApiResponse = getQuestions();
+        if (questionsApiResponse.getResults().size() == 0) {
+            display.showApiProblem();
+            return questionList;
+        }
         for (int i = 0; i <NUM_OF_QUESTIONS; i++) {
             ApiQuestion apiQuestion = questionsApiResponse.getResults().get(i);
             questionList.add(parseQuestion(i + 1, apiQuestion));

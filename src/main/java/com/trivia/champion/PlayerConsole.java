@@ -68,16 +68,6 @@ public class PlayerConsole implements IPlayerUi {
             System.out.println(i + 1 + " - " + categories.get(i));
         }
         System.out.println(categories.size() + 1 + " - " + "Quit");
-//        System.out.println("Welcome To TRIVIA CHAMPION!");
-//        System.out.println("-------------------------\n");
-//        System.out.println("Pick a category:");
-//        System.out.println("-------------------------\n");
-//        System.out.println("1 - General");
-//        System.out.println("2 - Sports");
-//        System.out.println("3 - Geography");
-//        System.out.println("4 - History");
-//        System.out.println("5 - Animals");
-//        System.out.println("6 - Quit");
     }
 
     @Override
@@ -94,7 +84,7 @@ public class PlayerConsole implements IPlayerUi {
 
     @Override
     public void showTotalScore(int totalScore) {
-        System.out.println("Your TOTAL score is: " + totalScore);
+        System.out.println("Your TOTAL score is: " + totalScore + "\n");
     }
 
     @Override
@@ -116,6 +106,11 @@ public class PlayerConsole implements IPlayerUi {
     @Override
     public void showQuestion(Question question) {
         System.out.println(question.toString());
+    }
+
+    @Override
+    public void showApiProblem() {
+        System.out.println("There is a problem with the server - please try another category-difficulty combination.");
     }
 
     public void showInvalidRange(int endOfRange) {

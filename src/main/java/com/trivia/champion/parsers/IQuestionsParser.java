@@ -4,7 +4,7 @@ import com.trivia.champion.QuestionList;
 
 import java.io.IOException;
 
-public interface IParser {
+public interface IQuestionsParser {
     Object data = null;
 
     QuestionList parse() throws IOException, InterruptedException;

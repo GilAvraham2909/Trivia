@@ -26,6 +26,8 @@ public interface IPlayerUi {
 
     void showQuestion(Question question);
 
+    void showApiProblem();
+
     void showCorrectAndScore(int currentRoundScore);
 
     void showTotalRoundScore(int totalRoundScore);

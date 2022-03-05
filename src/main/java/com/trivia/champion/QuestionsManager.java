@@ -1,8 +1,8 @@
 package com.trivia.champion;
 
 import com.trivia.champion.enums.Difficulty;
-import com.trivia.champion.parsers.QuestionsApiParser;
-import com.trivia.champion.parsers.IParser;
+import com.trivia.champion.parsers.ApiQuestionsParser;
+import com.trivia.champion.parsers.IQuestionsParser;
 
 import java.io.IOException;
 
@@ -10,13 +10,13 @@ public class QuestionsManager {
     private String category;
     private Difficulty difficulty;
     private QuestionList questionsList;
-    private IParser parser;
+    private IQuestionsParser parser;
 
     public QuestionsManager(String category, Difficulty difficulty) throws IOException, InterruptedException {
         this.category = category;
         this.difficulty = difficulty;
         // todo: change
-        parser = new QuestionsApiParser(category, difficulty);
+        parser = new ApiQuestionsParser(category, difficulty);
         questionsList = initializeQuestions();
     }
 
@@ -26,6 +26,10 @@ public class QuestionsManager {
 
     public Question nextQuestion() {
         return questionsList.nextQuestion();
+    }
+
+    public boolean isQuestionsListEmpty() {
+        return questionsList.isEmpty();
     }
 
     public boolean isCorrectAnswer(int answerNum) {

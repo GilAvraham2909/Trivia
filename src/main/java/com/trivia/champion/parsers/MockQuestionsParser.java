@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static com.trivia.champion.utils.Constants.*;
 
-public class MockParser implements IParser{
+public class MockQuestionsParser implements IQuestionsParser {
     private List<String> incorrectAnswers = new ArrayList<>();
     private QuestionList questionList = new QuestionList();
     private String question, correctAnswer;

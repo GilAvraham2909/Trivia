@@ -16,6 +16,9 @@ public class RoundManager {
 
     public int startRound(String category, Difficulty difficulty) throws IOException, InterruptedException {
         questionsManager = new QuestionsManager(category, difficulty);
+        if (questionsManager.isQuestionsListEmpty()) {
+            return 0;
+        }
         RoundScoreFactory roundScoreFactory = new RoundScoreFactory();
         RoundScore score = roundScoreFactory.makeRoundScore(difficulty);
         // start asking the user questions, get answers and change score
