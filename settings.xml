@@ -3,4 +3,5 @@
 <properties>
 <entry key="uiType">0</entry>
 <entry key="dbType">0</entry>
+<entry key="gameMode">0</entry>
 </properties>

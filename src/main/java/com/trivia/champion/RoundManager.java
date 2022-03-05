@@ -19,7 +19,7 @@ public class RoundManager {
 
     public RoundManager() throws IOException {}
 
-    public int startRound(String category, Difficulty difficulty) throws IOException, InterruptedException {
+    public int startRound(String category, Difficulty difficulty) throws Exception {
         QuestionsManager questionsManager = new QuestionsManager(category, difficulty);
         if (questionsManager.isQuestionsListEmpty()) {
             return 0;

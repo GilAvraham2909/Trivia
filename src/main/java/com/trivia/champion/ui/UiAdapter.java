@@ -1,6 +1,7 @@
 package com.trivia.champion.ui;
 
 import com.trivia.champion.AppConfig;
+import com.trivia.champion.FlowManager;
 import com.trivia.champion.IInputGetter;
 import com.trivia.champion.IPlayerUi;
 import com.trivia.champion.enums.UiTypes;
@@ -17,6 +18,7 @@ import static com.trivia.champion.utils.Constants.PROPERTY_UI_TYPE;
 
 public class UiAdapter {
     private int uiType;
+    private static UiAdapter single_instance = null;
 
     public UiAdapter() throws IOException {
         try {
@@ -24,6 +26,12 @@ public class UiAdapter {
         } catch (Exception e) {
             setUiTypeToDefault();
         }
+    }
+
+    public static UiAdapter getInstance() throws Exception {
+        if (single_instance == null)
+            single_instance = new UiAdapter();
+        return single_instance;
     }
 
     public IPlayerUi getUiOutput() throws IOException {

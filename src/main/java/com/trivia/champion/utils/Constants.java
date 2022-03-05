@@ -12,8 +12,9 @@ public final class Constants  {
     public static final String QUESTIONS_API_PREFIX = "https://opentdb.com/api.php?";
     public static final String QUESTIONS_API_SUFFIX = "type=multiple&encode=base64";
     public static final String CATEGORIES_API = "https://opentdb.com/api_category.php";
-    public static final String[] CATEGORY_TYPES = {"default", "api", "file"};
     public static final String PROPERTIES_FILE_NAME = "settings.xml";
+    public static final String PROPERTY_GAME_MODE = "gameMode";
+    public static final Integer DEFAULT_GAME_MODE = 0;
     public static final String PROPERTY_UI_TYPE = "uiType";
     public static final Integer DEFAULT_UI_TYPE = 0;
     public static final String PROPERTY_DB_TYPE = "dbType";

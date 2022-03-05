@@ -1,5 +1,6 @@
 package com.trivia.champion.questions;
 
+import com.trivia.champion.GameModeAdapter;
 import com.trivia.champion.enums.Difficulty;
 import com.trivia.champion.parsers.ApiQuestionsParser;
 import com.trivia.champion.parsers.IQuestionsParser;
@@ -12,11 +13,11 @@ public class QuestionsManager {
     private QuestionList questionsList;
     private IQuestionsParser parser;
 
-    public QuestionsManager(String category, Difficulty difficulty) throws IOException, InterruptedException {
+    public QuestionsManager(String category, Difficulty difficulty) throws Exception {
         this.category = category;
         this.difficulty = difficulty;
-        // todo: change
-        parser = new ApiQuestionsParser(category, difficulty);
+        GameModeAdapter gameModeAdapter = GameModeAdapter.getInstance();
+        parser = gameModeAdapter.getQuestionsParser(category, difficulty);
         questionsList = initializeQuestions();
     }
 

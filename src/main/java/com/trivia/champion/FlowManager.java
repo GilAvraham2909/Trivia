@@ -16,13 +16,12 @@ import static com.trivia.champion.utils.Constants.*;
 // singleton class
 public class FlowManager {
     public boolean quitGame = false;
-    UiAdapter uiAdapter = new UiAdapter();
+    UiAdapter uiAdapter = UiAdapter.getInstance();
     private IPlayerUi display = uiAdapter.getUiOutput();
     private IInputGetter inputGetter = uiAdapter.getUiInput();
-
     private RoundManager roundManager = new RoundManager();
     private int currentTotalScore;
-    private DbAdapter dbAdapter = new DbAdapter();
+    private DbAdapter dbAdapter = DbAdapter.getInstance();
     private IDB db = dbAdapter.getDb();
 
     private static FlowManager single_instance = null;
@@ -34,7 +33,6 @@ public class FlowManager {
             single_instance = new FlowManager();
         return single_instance;
     }
-
 
     public void start() throws Exception {
         User user = login();
@@ -63,15 +61,14 @@ public class FlowManager {
         display.showTotalScore(userScore);
     }
 
-    // TODO improve to a better implementation
     private String getCategory() throws IllegalStateException, IOException, InterruptedException {
-        Categories categories = new ApiCategories();
+        GameModeAdapter gameModeAdapter = new GameModeAdapter();
+        Categories categories = gameModeAdapter.getCategoriesType();
         display.showMainMenu(categories.getCategories());
         int categoryIndex = inputGetter.getIntFromUser(AppConfig.numOfCategoryOptions);
         return categories.getCategory(categoryIndex);
     }
 
-    // TODO improve to a better implementation
     private Difficulty getDifficulty(String category) throws IllegalStateException {
         display.showDifficultyLevel(category);
         int difficulty = inputGetter.getIntFromUser(NUM_OF_DIFFICULTY_OPTIONS);

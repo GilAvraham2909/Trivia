@@ -1,6 +1,7 @@
 package com.trivia.champion.db;
 
 import com.trivia.champion.AppConfig;
+import com.trivia.champion.FlowManager;
 import com.trivia.champion.enums.DbTypes;
 import com.trivia.champion.enums.UiTypes;
 import com.trivia.champion.ui.output.PlayerConsole;
@@ -14,6 +15,7 @@ import static com.trivia.champion.utils.Constants.*;
 
 public class DbAdapter {
     private int dbType;
+    private static DbAdapter single_instance = null;
 
     public DbAdapter() throws IOException {
         try {
@@ -21,6 +23,12 @@ public class DbAdapter {
         } catch (Exception e) {
             setDbTypeToDefault();
         }
+    }
+
+    public static DbAdapter getInstance() throws Exception {
+        if (single_instance == null)
+            single_instance = new DbAdapter();
+        return single_instance;
     }
 
     public IDB getDb() throws Exception {

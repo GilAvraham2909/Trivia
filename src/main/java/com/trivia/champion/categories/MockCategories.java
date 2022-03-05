@@ -2,10 +2,10 @@ package com.trivia.champion.categories;
 
 import java.util.ArrayList;
 
-public class DefaultCategories extends Categories {
+public class MockCategories extends Categories {
     private ArrayList<String> categories = new ArrayList<>();
 
-    public DefaultCategories() {
+    public MockCategories() {
         categories.add("General Knowledge");
         categories.add("Sports");
         categories.add("Geography");
