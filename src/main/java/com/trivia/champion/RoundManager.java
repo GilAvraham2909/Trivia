@@ -1,6 +1,11 @@
 package com.trivia.champion;
 
 import com.trivia.champion.enums.Difficulty;
+import com.trivia.champion.questions.Question;
+import com.trivia.champion.questions.QuestionsManager;
+import com.trivia.champion.ui.UiAdapter;
+import com.trivia.champion.ui.input.ConsoleInputGetter;
+import com.trivia.champion.ui.output.PlayerConsole;
 
 import java.io.IOException;
 
@@ -8,14 +13,14 @@ import static com.trivia.champion.utils.Constants.NUM_OF_OPTIONAL_ANSWERS;
 import static com.trivia.champion.utils.Constants.NUM_OF_QUESTIONS;
 
 public class RoundManager {
-    private QuestionsManager questionsManager;
-    private IPlayerUi display = PlayerConsole.getInstance();
-    private InputGetter inputGetter = new InputGetter();
+    private final IPlayerUi display = PlayerConsole.getInstance();
+    private final UiAdapter uiAdapter = new UiAdapter();
+    private final IInputGetter inputGetter = uiAdapter.getUiInput();
 
-    public RoundManager() {}
+    public RoundManager() throws IOException {}
 
     public int startRound(String category, Difficulty difficulty) throws IOException, InterruptedException {
-        questionsManager = new QuestionsManager(category, difficulty);
+        QuestionsManager questionsManager = new QuestionsManager(category, difficulty);
         if (questionsManager.isQuestionsListEmpty()) {
             return 0;
         }

@@ -1,7 +1,12 @@
 package com.trivia.champion;
 
+import com.trivia.champion.categories.ApiCategories;
+import com.trivia.champion.categories.Categories;
+import com.trivia.champion.db.DbAdapter;
+import com.trivia.champion.db.IDB;
 import com.trivia.champion.db.SqliteDB;
 import com.trivia.champion.enums.Difficulty;
+import com.trivia.champion.ui.UiAdapter;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,27 +16,27 @@ import static com.trivia.champion.utils.Constants.*;
 // singleton class
 public class FlowManager {
     public boolean quitGame = false;
-    //new UiAdapter
+    UiAdapter uiAdapter = new UiAdapter();
+    private IPlayerUi display = uiAdapter.getUiOutput();
+    private IInputGetter inputGetter = uiAdapter.getUiInput();
 
-    //TODO private IShow display = uiAdapter(CONSOLE);
-    private IPlayerUi display = PlayerConsole.getInstance();
-    private InputGetter inputGetter = new InputGetter();
     private RoundManager roundManager = new RoundManager();
     private int currentTotalScore;
-    private SqliteDB db = new SqliteDB();
+    private DbAdapter dbAdapter = new DbAdapter();
+    private IDB db = dbAdapter.getDb();
 
     private static FlowManager single_instance = null;
 
-    private FlowManager() throws SQLException {}
+    private FlowManager() throws Exception {}
 
-    public static FlowManager getInstance() throws SQLException {
+    public static FlowManager getInstance() throws Exception {
         if (single_instance == null)
             single_instance = new FlowManager();
         return single_instance;
     }
 
 
-    public void start() throws IOException, InterruptedException, SQLException {
+    public void start() throws Exception {
         User user = login();
         display.greetUser(user.getName(),user.getScore());
 
@@ -50,7 +55,7 @@ public class FlowManager {
         }
     }
 
-    public void gameManagement(String category, Difficulty difficulty, User user) throws IOException, InterruptedException, SQLException {
+    public void gameManagement(String category, Difficulty difficulty, User user) throws Exception {
         int roundScore = roundManager.startRound(category, difficulty);
         this.currentTotalScore += roundScore;
         // save the new score in the DB
@@ -79,11 +84,11 @@ public class FlowManager {
         };
     }
 
-    public void getScoreBoard() throws SQLException {
-        display.scoreBoard(this.db.scoreBord());
+    public void getScoreBoard() throws Exception {
+        display.scoreBoard(this.db.scoreBoard());
     }
 
-    public User login() throws SQLException {
+    public User login() throws Exception {
         display.showWelcomePage();
         int userChoice = inputGetter.getIntFromUser(NUM_OF_WELCOME_PAGE_OPTIONS);
         User user = null;

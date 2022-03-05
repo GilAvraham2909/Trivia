@@ -1,7 +1,7 @@
 package com.trivia.champion.parsers;
 
-import com.trivia.champion.Question;
-import com.trivia.champion.QuestionList;
+import com.trivia.champion.questions.Question;
+import com.trivia.champion.questions.QuestionList;
 
 import java.util.ArrayList;
 import java.util.List;

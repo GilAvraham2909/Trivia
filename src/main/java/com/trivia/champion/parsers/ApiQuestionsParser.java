@@ -3,7 +3,13 @@ package com.trivia.champion.parsers;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trivia.champion.*;
+import com.trivia.champion.categories.ApiCategories;
 import com.trivia.champion.enums.Difficulty;
+import com.trivia.champion.questions.ApiQuestion;
+import com.trivia.champion.questions.Question;
+import com.trivia.champion.questions.QuestionList;
+import com.trivia.champion.questions.QuestionsApiResponse;
+import com.trivia.champion.ui.output.PlayerConsole;
 
 import java.io.IOException;
 import java.net.URI;
