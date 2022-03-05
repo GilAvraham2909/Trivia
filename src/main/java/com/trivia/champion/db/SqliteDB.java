@@ -6,25 +6,23 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.*;
 import java.util.List;
 
-public class SqliteDB {
+public class SqliteDB implements IDB {
 
 
     private String jdbcUrl = "jdbc:sqlite:users.db";
     private Connection connection = DriverManager.getConnection(jdbcUrl);
 
-//        String sql = "SELECT * FROM users WHERE name='gil'";
-//        String sql1 = "DELETE FROM users WHERE name='gil'";
-
     public SqliteDB() throws SQLException {
     }
 
-    public void createDB() throws SQLException {
+    @Override
+    public void createDB() throws Exception {
         String sql = "create table users (name varchar(25), password varchar(25), score int)";
         Statement statement = this.connection.createStatement();
         statement.executeUpdate(sql);
     }
 
-    public User getUserFromDB(String givenName) throws SQLException {
+    public User getUserFromDB(String givenName) throws Exception {
         String sql = "SELECT * FROM users WHERE name='" + givenName + "'";
         Statement statement = this.connection.createStatement();
         statement.execute(sql);
@@ -43,7 +41,7 @@ public class SqliteDB {
         return givenPass.equals(user.getPassword());
     }
 
-    public User addToDB(String givenName, String givenPass) throws SQLException {
+    public User addToDB(String givenName, String givenPass) throws Exception {
         String sql1 = "insert into users values ('" + givenName + "', '" + givenPass + "', 0)";
         Statement statement = connection.createStatement();
         int rows = statement.executeUpdate(sql1);
@@ -53,7 +51,7 @@ public class SqliteDB {
         return getUserFromDB(givenName);
     }
 
-    public int updateScore(@NotNull User user, int gameScore) throws SQLException {
+    public int updateScore(@NotNull User user, int gameScore) throws Exception {
 //        update 'users' set score='50' where name='ofir'
         int score = user.getScore() + gameScore;
         String sql1 = "update 'users' set score='" + score + "' where name='" + user.getName() + "'";
@@ -65,7 +63,7 @@ public class SqliteDB {
         return score;
     }
 
-    public List<User> scoreBord() throws SQLException {
+    public List<User> scoreBoard() throws Exception {
         List<User> usersList = null;
         String sql = "select * from users order by score desc";
         Statement statement = this.connection.createStatement();

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, InterruptedException, SQLException  //static method
+    public static void main(String[] args) throws Exception  //static method
     {
         FlowManager flowManager = FlowManager.getInstance();
         flowManager.start();

@@ -1,9 +1,5 @@
 package com.trivia.champion.utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public final class Constants  {
     public static final int NUM_OF_USER_TYPES = 2;
     public static final int NUM_OF_WELCOME_PAGE_OPTIONS = 2;
@@ -17,7 +13,14 @@ public final class Constants  {
     public static final String QUESTIONS_API_SUFFIX = "type=multiple&encode=base64";
     public static final String CATEGORIES_API = "https://opentdb.com/api_category.php";
     public static final String[] CATEGORY_TYPES = {"default", "api", "file"};
-    public static final String[] UI_TYPES = {"console", "gui"};
+    public static final String PROPERTIES_FILE_NAME = "settings.xml";
+    public static final String PROPERTY_UI_TYPE = "uiType";
+    public static final Integer DEFAULT_UI_TYPE = 0;
+    public static final String PROPERTY_DB_TYPE = "dbType";
+    public static final Integer DEFAULT_DB_TYPE = 0;
+
+
+
 
 
 }

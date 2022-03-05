@@ -1,5 +1,7 @@
 package com.trivia.champion;
 
+import com.trivia.champion.questions.Question;
+
 import java.util.ArrayList;
 import java.util.List;
 
