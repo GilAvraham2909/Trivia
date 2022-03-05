@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
 import java.util.List;
-import java.util.Map;
 
 public class SqliteDB {
 
@@ -66,9 +65,9 @@ public class SqliteDB {
         return score;
     }
 
-    public List<User> getTop10() throws SQLException {
+    public List<User> scoreBord() throws SQLException {
         List<User> usersList = null;
-        String sql = "select * from users order by score desc LIMIT 10";
+        String sql = "select * from users order by score desc";
         Statement statement = this.connection.createStatement();
         statement.execute(sql);
         ResultSet result = statement.getResultSet();

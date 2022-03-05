@@ -80,7 +80,7 @@ public class FlowManager {
     }
 
     public void getScoreBoard() throws SQLException {
-        display.scoreBoard(this.db.getTop10());
+        display.scoreBoard(this.db.scoreBord());
     }
 
     public User login() throws SQLException {
