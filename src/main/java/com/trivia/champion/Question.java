@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static com.trivia.champion.utils.Constants.NUM_OF_OPTIONAL_ANSWERS;
+
 public class Question {
     private String question;
     private String correctAnswer;
@@ -50,11 +52,11 @@ public class Question {
     public String toString() {
         String head = "\n" + question;
         String underline = "\n-------------------------";
-        String answer1 = "\n1. " + map.get(1);
-        String answer2 = "\n2. " + map.get(2);
-        String answer3 = "\n3. " + map.get(3);
-        String answer4 = "\n4. " + map.get(4);
-        return head + underline + answer1 + answer2 + answer3 + answer4;
+        StringBuilder answers = new StringBuilder();
+        for (int i = 1; i <= NUM_OF_OPTIONAL_ANSWERS; i++) {
+            answers.append("\n").append(i).append(". ").append(map.get(i));
+        }
+        return head + underline + answers;
     }
 
 }
