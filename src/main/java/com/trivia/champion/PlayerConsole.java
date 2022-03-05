@@ -1,6 +1,5 @@
 package com.trivia.champion;
 
-import com.trivia.champion.enums.Category;
 import java.util.*;
 
 public class PlayerConsole implements IPlayerUi {
@@ -60,22 +59,30 @@ public class PlayerConsole implements IPlayerUi {
     }
 
     @Override
-    public void showMainMenu() {
+    public void showMainMenu(ArrayList<String> categories) {
         System.out.println("Welcome To TRIVIA CHAMPION!");
         System.out.println("-------------------------\n");
         System.out.println("Pick a category:");
         System.out.println("-------------------------\n");
-        System.out.println("1 - General");
-        System.out.println("2 - Sports");
-        System.out.println("3 - Geography");
-        System.out.println("4 - History");
-        System.out.println("5 - Animals");
-        System.out.println("6 - Quit");
+        for (int i = 0; i < categories.size(); i++) {
+            System.out.println(i + 1 + " - " + categories.get(i));
+        }
+        System.out.println(categories.size() + 1 + " - " + "Quit");
+//        System.out.println("Welcome To TRIVIA CHAMPION!");
+//        System.out.println("-------------------------\n");
+//        System.out.println("Pick a category:");
+//        System.out.println("-------------------------\n");
+//        System.out.println("1 - General");
+//        System.out.println("2 - Sports");
+//        System.out.println("3 - Geography");
+//        System.out.println("4 - History");
+//        System.out.println("5 - Animals");
+//        System.out.println("6 - Quit");
     }
 
     @Override
-    public void showDifficultyLevel(Category category) {
-        System.out.println("Category: " + category.toString());
+    public void showDifficultyLevel(String category) {
+        System.out.println("Category: " + category);
         System.out.println("-------------------------\n");
         System.out.println("Pick a difficulty level:");
         System.out.println("-------------------------\n");

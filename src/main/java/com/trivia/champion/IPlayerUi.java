@@ -1,9 +1,7 @@
 package com.trivia.champion;
 
-import com.trivia.champion.enums.Category;
-
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public interface IPlayerUi {
     void showWelcomePage();
@@ -22,9 +20,9 @@ public interface IPlayerUi {
 
     void showTotalScore(int totalScore);
 
-    void showMainMenu();
+    void showMainMenu(ArrayList<String> categories);
 
-    void showDifficultyLevel(Category category);
+    void showDifficultyLevel(String category);
 
     void showQuestion(Question question);
 

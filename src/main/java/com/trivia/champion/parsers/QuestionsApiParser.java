@@ -2,11 +2,7 @@ package com.trivia.champion.parsers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.trivia.champion.ApiQuestion;
-import com.trivia.champion.ApiResponse;
-import com.trivia.champion.Question;
-import com.trivia.champion.QuestionList;
-import com.trivia.champion.enums.Category;
+import com.trivia.champion.*;
 import com.trivia.champion.enums.Difficulty;
 
 import java.io.IOException;
@@ -18,12 +14,12 @@ import java.util.List;
 
 import static com.trivia.champion.utils.Constants.*;
 
-public class ApiParser implements IParser {
+public class QuestionsApiParser implements IParser {
     private HttpClient client;
-    private Category category;
+    private String category;
     private Difficulty difficulty;
 
-    public ApiParser(Category category, Difficulty difficulty) {
+    public QuestionsApiParser(String category, Difficulty difficulty) {
         this.client = HttpClient.newHttpClient();
         this.category = category;
         this.difficulty = difficulty;
@@ -32,9 +28,9 @@ public class ApiParser implements IParser {
     @Override
     public QuestionList parse() throws IOException, InterruptedException {
         QuestionList questionList = new QuestionList();
-        ApiResponse apiResponse = getQuestions();
+        QuestionsApiResponse questionsApiResponse = getQuestions();
         for (int i = 0; i <NUM_OF_QUESTIONS; i++) {
-            ApiQuestion apiQuestion = apiResponse.getResults().get(i);
+            ApiQuestion apiQuestion = questionsApiResponse.getResults().get(i);
             questionList.add(parseQuestion(i + 1, apiQuestion));
         }
         return questionList;
@@ -47,7 +43,7 @@ public class ApiParser implements IParser {
         return new Question(questionNumber + ". " + question, correctAnswer, incorrectAnswers);
     }
 
-    private ApiResponse getQuestions() throws IOException, InterruptedException {
+    private QuestionsApiResponse getQuestions() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .header("accept", "application/json")
@@ -59,21 +55,15 @@ public class ApiParser implements IParser {
         return mapper.readValue(response.body(), new TypeReference<>() {});
     }
 
-    private String createApiRequest() {
+    private String createApiRequest() throws IOException, InterruptedException {
         String amount = "amount=" + NUM_OF_QUESTIONS + "&";
-        String category = "category=" + getApiCategory() + "&";
+        String category = "category=" + getApiCategoryId() + "&";
         String difficulty = "difficulty=" + getApiDifficulty() + "&";
-        return API_PREFIX + amount + category + difficulty + API_SUFFIX;
+        return QUESTIONS_API_PREFIX + amount + category + difficulty + QUESTIONS_API_SUFFIX;
     }
 
-    private String getApiCategory() {
-        return switch (category) {
-            case GENERAL -> "9";
-            case SPORTS -> "21";
-            case GEOGRAPHY -> "22";
-            case HISTORY -> "23";
-            case ANIMALS -> "27";
-        };
+    private int getApiCategoryId() throws IOException, InterruptedException {
+        return new ApiCategories().getCategoryId(category);
     }
 
     private String getApiDifficulty() {

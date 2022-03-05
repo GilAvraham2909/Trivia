@@ -1,23 +1,22 @@
 package com.trivia.champion;
 
-import com.trivia.champion.enums.Category;
 import com.trivia.champion.enums.Difficulty;
-import com.trivia.champion.parsers.ApiParser;
+import com.trivia.champion.parsers.QuestionsApiParser;
 import com.trivia.champion.parsers.IParser;
 
 import java.io.IOException;
 
 public class QuestionsManager {
-    private Category category;
+    private String category;
     private Difficulty difficulty;
     private QuestionList questionsList;
-//    private IParser parser = new MockParser();
     private IParser parser;
 
-    public QuestionsManager(Category category, Difficulty difficulty) throws IOException, InterruptedException {
+    public QuestionsManager(String category, Difficulty difficulty) throws IOException, InterruptedException {
         this.category = category;
         this.difficulty = difficulty;
-        parser = new ApiParser(category, difficulty);
+        // todo: change
+        parser = new QuestionsApiParser(category, difficulty);
         questionsList = initializeQuestions();
     }
 

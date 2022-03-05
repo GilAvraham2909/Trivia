@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Random;
 
 import static com.trivia.champion.utils.Constants.NUM_OF_OPTIONAL_ANSWERS;
-import static com.trivia.champion.utils.Constants.NUM_OF_QUESTIONS;
 
 public class Question {
     private String question;

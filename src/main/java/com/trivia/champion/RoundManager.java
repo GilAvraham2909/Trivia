@@ -1,6 +1,5 @@
 package com.trivia.champion;
 
-import com.trivia.champion.enums.Category;
 import com.trivia.champion.enums.Difficulty;
 
 import java.io.IOException;
@@ -16,7 +15,7 @@ public class RoundManager {
 
     public RoundManager() {}
 
-    public int startRound(Category category, Difficulty difficulty) throws IOException, InterruptedException {
+    public int startRound(String category, Difficulty difficulty) throws IOException, InterruptedException {
         questionsManager = new QuestionsManager(category, difficulty);
         RoundScoreFactory roundScoreFactory = new RoundScoreFactory();
         RoundScore score = roundScoreFactory.makeRoundScore(difficulty);

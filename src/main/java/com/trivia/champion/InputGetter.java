@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputGetter {
-    private PlayerConsole console = PlayerConsole.getInstance();
+    private final PlayerConsole console = PlayerConsole.getInstance();
 
     public int getIntFromUser(int endOfRange) throws InputMismatchException {
         while (true) {

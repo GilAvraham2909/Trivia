@@ -2,7 +2,7 @@ package com.trivia.champion;
 
 import java.util.List;
 
-public class ApiResponse {
+public class QuestionsApiResponse {
     private String response_code;
     private List<ApiQuestion> results;
 

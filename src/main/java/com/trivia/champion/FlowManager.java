@@ -1,7 +1,6 @@
 package com.trivia.champion;
 
 import com.trivia.champion.db.SqliteDB;
-import com.trivia.champion.enums.Category;
 import com.trivia.champion.enums.Difficulty;
 
 import java.io.IOException;
@@ -34,7 +33,12 @@ public class FlowManager {
     public void start() throws IOException, InterruptedException, SQLException {
         User user = login();
         display.greetUser(user.getName(),user.getScore());
-        Category category = getCategory();
+//        CategoryEnum categoryEnum = getCategory();
+//        if (categoryEnum == null) {
+//            gameFinished = true;
+//            return;
+//        }
+        String category = getCategory();
         if (category == null) {
             gameFinished = true;
             return;
@@ -47,7 +51,7 @@ public class FlowManager {
         gameManagement(category, difficulty, user);
     }
 
-    public void gameManagement(Category category, Difficulty difficulty, User user) throws IOException, InterruptedException, SQLException {
+    public void gameManagement(String category, Difficulty difficulty, User user) throws IOException, InterruptedException, SQLException {
         int roundScore = roundManager.startRound(category, difficulty);
         this.currentTotalScore += roundScore;
         // save the new score in the DB
@@ -56,22 +60,15 @@ public class FlowManager {
     }
 
     // TODO improve to a better implementation
-    private Category getCategory() throws IllegalStateException {
-        display.showMainMenu();
-        int category = inputGetter.getIntFromUser(NUM_OF_CATEGORY_OPTIONS);
-        return switch (category) {
-            case 1 -> Category.GENERAL;
-            case 2 -> Category.SPORTS;
-            case 3 -> Category.GEOGRAPHY;
-            case 4 -> Category.HISTORY;
-            case 5 -> Category.ANIMALS;
-            case 6 -> null;
-            default -> throw new IllegalStateException("Unexpected value: " + category);
-        };
+    private String getCategory() throws IllegalStateException, IOException, InterruptedException {
+        Categories categories = new ApiCategories();
+        display.showMainMenu(categories.getCategories());
+        int categoryIndex = inputGetter.getIntFromUser(AppConfig.numOfCategoryOptions);
+        return categories.getCategory(categoryIndex);
     }
 
     // TODO improve to a better implementation
-    private Difficulty getDifficulty(Category category) throws IllegalStateException {
+    private Difficulty getDifficulty(String category) throws IllegalStateException {
         display.showDifficultyLevel(category);
         int difficulty = inputGetter.getIntFromUser(NUM_OF_DIFFICULTY_OPTIONS);
         return switch (difficulty) {
