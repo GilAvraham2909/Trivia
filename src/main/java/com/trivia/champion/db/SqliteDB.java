@@ -23,7 +23,6 @@ public class SqliteDB {
         String sql = "create table users (name varchar(25), password varchar(25), score int)";
         Statement statement = this.connection.createStatement();
         statement.executeUpdate(sql);
-        System.out.println("Table created");
     }
 
     public User getUserFromDB(String givenName) throws SQLException {
@@ -31,7 +30,7 @@ public class SqliteDB {
         Statement statement = this.connection.createStatement();
         statement.execute(sql);
         ResultSet result = statement.getResultSet();
-        if (result.next() == false){
+        if (!result.next()){
             return null;
         }
         String name = result.getString("name");
