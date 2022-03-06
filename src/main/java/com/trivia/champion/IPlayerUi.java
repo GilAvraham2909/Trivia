@@ -34,5 +34,5 @@ public interface IPlayerUi {
 
     void showTotalRoundScore(int totalRoundScore);
 
-    void scoreBoard(List<User> top10Users);
+    void scoreBoard(List<User> top10Users, int myPlace);
 }

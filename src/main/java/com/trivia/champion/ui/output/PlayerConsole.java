@@ -9,7 +9,8 @@ import java.util.*;
 public class PlayerConsole implements IPlayerUi {
     private static PlayerConsole single_instance = null;
 
-    public PlayerConsole() {}
+    public PlayerConsole() {
+    }
 
     public static PlayerConsole getInstance() {
         if (single_instance == null)
@@ -103,8 +104,16 @@ public class PlayerConsole implements IPlayerUi {
     }
 
     @Override
-    public void scoreBoard(List<User> top10Users) {
-        // TODO: 04/03/2022  add implementation.
+    public void scoreBoard(List<User> usersList, int myPlace) {
+        System.out.println("Your Place is: " + myPlace + "\n");
+        System.out.println("-------------------------\n");
+        System.out.println("TOP 10:");
+        int i = 1;
+        for (User user : usersList) {
+            System.out.println((i) + " place: " + user.getName() + " with " + user.getScore());
+            i++;
+        }
+        System.out.println("-------------------------\n");
     }
 
     @Override

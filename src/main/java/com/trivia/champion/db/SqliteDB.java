@@ -4,6 +4,7 @@ import com.trivia.champion.User;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SqliteDB implements IDB {
@@ -32,8 +33,9 @@ public class SqliteDB implements IDB {
         }
         String name = result.getString("name");
         String pass = result.getString("password");
+        String type = result.getString("type");
         int score = result.getInt("score");
-        return new User(name, pass, score);
+        return new User(name, pass, score, type);
 
     }
 
@@ -42,7 +44,8 @@ public class SqliteDB implements IDB {
     }
 
     public User addToDB(String givenName, String givenPass) throws Exception {
-        String sql1 = "insert into users values ('" + givenName + "', '" + givenPass + "', 0)";
+
+        String sql1 = "insert into users values ('" + givenName + "', '" + givenPass + "', 0, 'user')";
         Statement statement = connection.createStatement();
         int rows = statement.executeUpdate(sql1);
         if (rows == 0) {
@@ -52,7 +55,6 @@ public class SqliteDB implements IDB {
     }
 
     public int updateScore(@NotNull User user, int gameScore) throws Exception {
-//        update 'users' set score='50' where name='ofir'
         int score = user.getScore() + gameScore;
         String sql1 = "update 'users' set score='" + score + "' where name='" + user.getName() + "'";
         Statement statement = connection.createStatement();
@@ -64,8 +66,8 @@ public class SqliteDB implements IDB {
     }
 
     public List<User> scoreBoard() throws Exception {
-        List<User> usersList = null;
-        String sql = "select * from users order by score desc";
+        List<User> usersList = new ArrayList<User>();
+        String sql = "select * from users where type != 'admin' order by score desc";
         Statement statement = this.connection.createStatement();
         statement.execute(sql);
         ResultSet result = statement.getResultSet();

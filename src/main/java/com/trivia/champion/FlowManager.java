@@ -10,6 +10,7 @@ import com.trivia.champion.ui.UiAdapter;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import static com.trivia.champion.utils.Constants.*;
 
@@ -23,10 +24,12 @@ public class FlowManager {
     private int currentTotalScore;
     private DbAdapter dbAdapter = DbAdapter.getInstance();
     private IDB db = dbAdapter.getDb();
+    private User user = null;
 
     private static FlowManager single_instance = null;
 
-    private FlowManager() throws Exception {}
+    private FlowManager() throws Exception {
+    }
 
     public static FlowManager getInstance() throws Exception {
         if (single_instance == null)
@@ -35,8 +38,8 @@ public class FlowManager {
     }
 
     public void start() throws Exception {
-        User user = login();
-        display.greetUser(user.getName(),user.getScore());
+        this.user = login();
+        display.greetUser(user.getName(), user.getScore());
 
         while (!quitGame) {
             String category = getCategory();
@@ -59,6 +62,7 @@ public class FlowManager {
         // save the new score in the DB
         int userScore = db.updateScore(user, this.currentTotalScore);
         display.showTotalScore(userScore);
+        getScoreBoard();
     }
 
     private String getCategory() throws IllegalStateException, IOException, InterruptedException {
@@ -82,7 +86,8 @@ public class FlowManager {
     }
 
     public void getScoreBoard() throws Exception {
-        display.scoreBoard(this.db.scoreBoard());
+        List<User> usersList = this.db.scoreBoard();
+        display.scoreBoard(usersList, this.user.userPlace(usersList));
     }
 
     public User login() throws Exception {

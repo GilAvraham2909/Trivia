@@ -90,7 +90,7 @@ public class PlayerGui implements IPlayerUi {
     }
 
     @Override
-    public void scoreBoard(List<User> top10Users) {
+    public void scoreBoard(List<User> top10Users, int myPlace) {
 
     }
 }
