@@ -1,4 +1,4 @@
-package com.trivia.champion.ui.output;
+package com.trivia.champion.ui.output.player;
 
 import com.trivia.champion.IPlayerUi;
 import com.trivia.champion.Player;
@@ -11,7 +11,7 @@ import java.util.List;
 public class PlayerGui implements IPlayerUi {
     private static PlayerGui single_instance = null;
 
-    public PlayerGui() {}
+    private PlayerGui() {}
 
     public static PlayerGui getInstance() {
         if (single_instance == null)

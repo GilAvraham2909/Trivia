@@ -10,12 +10,11 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.trivia.champion.utils.Constants.NUM_OF_DIFFICULTY_OPTIONS;
-import static com.trivia.champion.utils.Constants.NUM_OF_WELCOME_PAGE_OPTIONS;
 
-public class PlayerFlowManager extends FlowManager{
+public class PlayerFlowManager extends FlowManager {
     public boolean quitGame = false;
     UiAdapter uiAdapter = UiAdapter.getInstance();
-    private IPlayerUi display = uiAdapter.getUiOutput();
+    private IPlayerUi display = uiAdapter.getPlayerUiOutput();
     private IInputGetter inputGetter = uiAdapter.getUiInput();
     private RoundManager roundManager = new RoundManager();
     private int currentTotalScore;
@@ -28,16 +27,6 @@ public class PlayerFlowManager extends FlowManager{
         this.player = (Player) user;
     }
 
-//    private static PlayerFlowManager single_instance = null;
-
-
-
-//    public static PlayerFlowManager getInstance() throws Exception {
-//        if (single_instance == null)
-//            single_instance = new PlayerFlowManager();
-//        return single_instance;
-//    }
-
     public void start() throws Exception {
         player.setScore(db.getPlayerScore(player.getName()));
         display.greetUser(player.getName(), player.getScore());
@@ -46,11 +35,13 @@ public class PlayerFlowManager extends FlowManager{
             String category = getCategory();
             if (category == null) {
                 quitGame = true;
+                db.closeConnection();
                 return;
             }
             Difficulty difficulty = getDifficulty(category);
             if (difficulty == null) {
                 quitGame = true;
+                db.closeConnection();
                 return;
             }
             gameManagement(category, difficulty, player);
@@ -67,9 +58,9 @@ public class PlayerFlowManager extends FlowManager{
         getScoreBoard();
     }
 
-    private String getCategory() throws IllegalStateException, IOException, InterruptedException {
-        GameModeAdapter gameModeAdapter = new GameModeAdapter();
-        Categories categories = gameModeAdapter.getCategoriesType();
+    private String getCategory() throws Exception {
+        GameModeFactory gameModeFactory = GameModeFactory.getInstance();
+        Categories categories = gameModeFactory.getCategoriesType();
         display.showMainMenu(categories.getCategories());
         int categoryIndex = inputGetter.getIntFromUser(AppConfig.numOfCategoryOptions);
         return categories.getCategory(categoryIndex);
@@ -92,50 +83,4 @@ public class PlayerFlowManager extends FlowManager{
         display.scoreBoard(playerList, this.player.playerPlace(playerList));
     }
 
-//    public User login() throws Exception {
-//        display.showWelcomePage();
-//        int userChoice = inputGetter.getIntFromUser(NUM_OF_WELCOME_PAGE_OPTIONS);
-//        User user = null;
-//        switch (userChoice) {
-//            // login
-//            case 1: {
-//                while (true) {
-//                    display.askForUserName();
-//                    String registeredUsername = inputGetter.getStringFromUser();
-//                    user = this.db.getUserFromDB(registeredUsername);
-//                    if (user != null) {
-//                        break;
-//                    }
-//                    display.couldNotFindUser();
-//                    userChoice = inputGetter.getIntFromUser(NUM_OF_WELCOME_PAGE_OPTIONS);
-//                    if (userChoice == 2) {
-//                        break;
-//                    }
-//                }
-//                if (user != null) {
-//                    display.askForUserPassword();
-//                    String registeredPassword = inputGetter.getStringFromUser();
-//                    while (!this.db.validateUser(user, registeredPassword)) {
-//                        display.incorrectPassword();
-//                        registeredPassword = inputGetter.getStringFromUser();
-//                    }
-//                    return user;
-//                }
-//            }
-//            // register
-//            case 2: {
-//                display.askForUserName();
-//                String newUsername = inputGetter.getStringFromUser();
-//                while (this.db.getUserFromDB(newUsername) != null) {
-//                    display.existingUser();
-//                    newUsername = inputGetter.getStringFromUser();
-//                }
-//                display.askForUserPassword();
-//                String newPassword = inputGetter.getStringFromUser();
-//                user = this.db.addToDB(newUsername, newPassword);
-//                break;
-//            }
-//        }
-//        return user;
-//    }
 }

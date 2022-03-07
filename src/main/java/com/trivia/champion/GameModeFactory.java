@@ -16,11 +16,11 @@ import java.util.Objects;
 
 import static com.trivia.champion.utils.Constants.*;
 
-public class GameModeAdapter {
+public class GameModeFactory {
     private int gameMode;
-    private static GameModeAdapter single_instance = null;
+    private static GameModeFactory single_instance = null;
 
-    public GameModeAdapter() throws IOException {
+    private GameModeFactory() throws IOException {
         try {
             gameMode = Integer.parseInt(Objects.requireNonNull(AppConfig.loadProperty(PROPERTY_GAME_MODE)));
         } catch (Exception e) {
@@ -28,9 +28,9 @@ public class GameModeAdapter {
         }
     }
 
-    public static GameModeAdapter getInstance() throws Exception {
+    public static GameModeFactory getInstance() throws Exception {
         if (single_instance == null)
-            single_instance = new GameModeAdapter();
+            single_instance = new GameModeFactory();
         return single_instance;
     }
 

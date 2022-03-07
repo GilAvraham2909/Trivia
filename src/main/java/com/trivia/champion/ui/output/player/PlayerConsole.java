@@ -1,16 +1,15 @@
-package com.trivia.champion.ui.output;
+package com.trivia.champion.ui.output.player;
 
 import com.trivia.champion.IPlayerUi;
 import com.trivia.champion.Player;
 import com.trivia.champion.questions.Question;
-import com.trivia.champion.User;
 
 import java.util.*;
 
 public class PlayerConsole implements IPlayerUi {
     private static PlayerConsole single_instance = null;
 
-    public PlayerConsole() {
+    private PlayerConsole() {
     }
 
     public static PlayerConsole getInstance() {

@@ -4,8 +4,10 @@ import com.trivia.champion.*;
 import com.trivia.champion.enums.UiTypes;
 import com.trivia.champion.ui.input.ConsoleInputGetter;
 import com.trivia.champion.ui.input.GuiInputGetter;
-import com.trivia.champion.ui.output.PlayerConsole;
-import com.trivia.champion.ui.output.PlayerGui;
+import com.trivia.champion.ui.output.admin.AdminConsole;
+import com.trivia.champion.ui.output.admin.AdminGui;
+import com.trivia.champion.ui.output.player.PlayerConsole;
+import com.trivia.champion.ui.output.player.PlayerGui;
 import com.trivia.champion.ui.output.login.LoginConsole;
 import com.trivia.champion.ui.output.login.LoginGui;
 
@@ -19,7 +21,7 @@ public class UiAdapter {
     private int uiType;
     private static UiAdapter single_instance = null;
 
-    public UiAdapter() throws IOException {
+    private UiAdapter() throws IOException {
         try {
             uiType = Integer.parseInt(Objects.requireNonNull(AppConfig.loadProperty(PROPERTY_UI_TYPE)));
         } catch (Exception e) {
@@ -40,11 +42,18 @@ public class UiAdapter {
             return new LoginGui();
     }
 
-    public IPlayerUi getUiOutput() throws IOException {
+    public IPlayerUi getPlayerUiOutput() throws IOException {
         if (uiType == UiTypes.CONSOLE.ordinal())
-            return new PlayerConsole();
+            return PlayerConsole.getInstance();
         else
-            return new PlayerGui();
+            return PlayerGui.getInstance();
+    }
+
+    public IAdminUi getAdminUiOutput() throws IOException {
+        if (uiType == UiTypes.CONSOLE.ordinal())
+            return AdminConsole.getInstance();
+        else
+            return AdminGui.getInstance();
     }
 
     public IInputGetter getUiInput() throws IOException {

@@ -9,7 +9,7 @@ import com.trivia.champion.questions.ApiQuestion;
 import com.trivia.champion.questions.Question;
 import com.trivia.champion.questions.QuestionList;
 import com.trivia.champion.questions.QuestionsApiResponse;
-import com.trivia.champion.ui.output.PlayerConsole;
+import com.trivia.champion.ui.output.player.PlayerConsole;
 
 import java.io.IOException;
 import java.net.URI;
