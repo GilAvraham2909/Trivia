@@ -1,15 +1,13 @@
 package com.trivia.champion;
 
-import com.trivia.champion.categories.ApiCategories;
 import com.trivia.champion.categories.Categories;
-import com.trivia.champion.db.DbAdapter;
+import com.trivia.champion.db.SqliteAdapter;
 import com.trivia.champion.db.IDB;
 import com.trivia.champion.db.SqliteDB;
 import com.trivia.champion.enums.Difficulty;
 import com.trivia.champion.ui.UiAdapter;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 import static com.trivia.champion.utils.Constants.*;
@@ -22,8 +20,8 @@ public class FlowManager {
     private IInputGetter inputGetter = uiAdapter.getUiInput();
     private RoundManager roundManager = new RoundManager();
     private int currentTotalScore;
-    private DbAdapter dbAdapter = DbAdapter.getInstance();
-    private IDB db = dbAdapter.getDb();
+    private SqliteDB sql = new SqliteDB();
+    private IDB db = new SqliteAdapter(sql);
     private User user = null;
 
     private static FlowManager single_instance = null;

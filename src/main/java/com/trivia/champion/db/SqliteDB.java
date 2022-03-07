@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SqliteDB implements IDB {
+public class SqliteDB {
 
 
     private String jdbcUrl = "jdbc:sqlite:users.db";
@@ -16,7 +16,6 @@ public class SqliteDB implements IDB {
     public SqliteDB() throws SQLException {
     }
 
-    @Override
     public void createDB() throws Exception {
         String sql = "create table users (name varchar(25), password varchar(25), score int)";
         Statement statement = this.connection.createStatement();
