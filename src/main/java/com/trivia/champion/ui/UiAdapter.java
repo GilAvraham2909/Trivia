@@ -1,14 +1,13 @@
 package com.trivia.champion.ui;
 
-import com.trivia.champion.AppConfig;
-import com.trivia.champion.FlowManager;
-import com.trivia.champion.IInputGetter;
-import com.trivia.champion.IPlayerUi;
+import com.trivia.champion.*;
 import com.trivia.champion.enums.UiTypes;
 import com.trivia.champion.ui.input.ConsoleInputGetter;
 import com.trivia.champion.ui.input.GuiInputGetter;
 import com.trivia.champion.ui.output.PlayerConsole;
 import com.trivia.champion.ui.output.PlayerGui;
+import com.trivia.champion.ui.output.login.LoginConsole;
+import com.trivia.champion.ui.output.login.LoginGui;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -32,6 +31,13 @@ public class UiAdapter {
         if (single_instance == null)
             single_instance = new UiAdapter();
         return single_instance;
+    }
+
+    public ILoginUi getLoginUiOutput() throws IOException {
+        if (uiType == UiTypes.CONSOLE.ordinal())
+            return new LoginConsole();
+        else
+            return new LoginGui();
     }
 
     public IPlayerUi getUiOutput() throws IOException {

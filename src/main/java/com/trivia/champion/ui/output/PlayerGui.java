@@ -1,8 +1,8 @@
 package com.trivia.champion.ui.output;
 
 import com.trivia.champion.IPlayerUi;
+import com.trivia.champion.Player;
 import com.trivia.champion.questions.Question;
-import com.trivia.champion.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,36 +17,6 @@ public class PlayerGui implements IPlayerUi {
         if (single_instance == null)
             single_instance = new PlayerGui();
         return single_instance;
-    }
-
-    @Override
-    public void showWelcomePage() {
-
-    }
-
-    @Override
-    public void askForUserName() {
-
-    }
-
-    @Override
-    public void askForUserPassword() {
-
-    }
-
-    @Override
-    public void existingUser() {
-
-    }
-
-    @Override
-    public void couldNotFindUser() {
-
-    }
-
-    @Override
-    public void incorrectPassword() {
-
     }
 
     @Override
@@ -90,7 +60,7 @@ public class PlayerGui implements IPlayerUi {
     }
 
     @Override
-    public void scoreBoard(List<User> top10Users, int myPlace) {
+    public void scoreBoard(List<Player> top10Users, int myPlace) {
 
     }
 }

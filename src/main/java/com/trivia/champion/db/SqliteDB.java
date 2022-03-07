@@ -1,6 +1,8 @@
 package com.trivia.champion.db;
 
+import com.trivia.champion.Player;
 import com.trivia.champion.User;
+import com.trivia.champion.UserFactory;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
@@ -12,6 +14,7 @@ public class SqliteDB implements IDB {
 
     private String jdbcUrl = "jdbc:sqlite:users.db";
     private Connection connection = DriverManager.getConnection(jdbcUrl);
+    private UserFactory userFactory = new UserFactory();
 
     public SqliteDB() throws SQLException {
     }
@@ -35,8 +38,19 @@ public class SqliteDB implements IDB {
         String pass = result.getString("password");
         String type = result.getString("type");
         int score = result.getInt("score");
-        return new User(name, pass, score, type);
+        return userFactory.createUser(name, pass, type);
+    }
 
+    @Override
+    public int getPlayerScore(String givenName) throws SQLException {
+        String sql = "SELECT * FROM users WHERE name='" + givenName + "'";
+        Statement statement = this.connection.createStatement();
+        statement.execute(sql);
+        ResultSet result = statement.getResultSet();
+        if (!result.next()){
+            return 0;
+        }
+        return result.getInt("score");
     }
 
     public boolean validateUser(@NotNull User user, String givenPass) {
@@ -54,9 +68,10 @@ public class SqliteDB implements IDB {
         return getUserFromDB(givenName);
     }
 
-    public int updateScore(@NotNull User user, int gameScore) throws Exception {
-        int score = user.getScore() + gameScore;
-        String sql1 = "update 'users' set score='" + score + "' where name='" + user.getName() + "'";
+
+    public int updateScore(@NotNull Player player, int gameScore) throws Exception {
+        int score = player.getScore() + gameScore;
+        String sql1 = "update 'users' set score='" + score + "' where name='" + player.getName() + "'";
         Statement statement = connection.createStatement();
         int rows = statement.executeUpdate(sql1);
         if (rows == 0) {
@@ -65,17 +80,26 @@ public class SqliteDB implements IDB {
         return score;
     }
 
-    public List<User> scoreBoard() throws Exception {
-        List<User> usersList = new ArrayList<User>();
+    public List<Player> scoreBoard() throws Exception {
+        List<Player> playerList = new ArrayList<>();
         String sql = "select * from users where type != 'admin' order by score desc";
         Statement statement = this.connection.createStatement();
         statement.execute(sql);
         ResultSet result = statement.getResultSet();
         while (result.next()) {
             String name = result.getString("name");
+            String pass = result.getString("password");
+            String type = result.getString("type");
             int score = result.getInt("score");
-            usersList.add(new User(name, score));
+            Player player = (Player) userFactory.createUser(name, pass, type);
+            player.setScore(score);
+            playerList.add(player);
         }
-        return usersList;
+        return playerList;
+    }
+
+    @Override
+    public void closeConnection() throws Exception {
+        this.connection.close();
     }
 }

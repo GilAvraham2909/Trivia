@@ -1,5 +1,6 @@
 package com.trivia.champion.db;
 
+import com.trivia.champion.Player;
 import com.trivia.champion.User;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,6 +19,11 @@ public class MongoDB implements IDB{
     }
 
     @Override
+    public int getPlayerScore(String givenName) throws Exception {
+        return 0;
+    }
+
+    @Override
     public boolean validateUser(@NotNull User user, String givenPass) throws Exception {
         return false;
     }
@@ -28,12 +34,17 @@ public class MongoDB implements IDB{
     }
 
     @Override
-    public int updateScore(@NotNull User user, int gameScore) throws Exception {
+    public int updateScore(@NotNull Player player, int gameScore) throws Exception {
         return 0;
     }
 
     @Override
-    public List<User> scoreBoard() throws Exception {
+    public List<Player> scoreBoard() throws Exception {
         return null;
+    }
+
+    @Override
+    public void closeConnection() throws Exception {
+
     }
 }

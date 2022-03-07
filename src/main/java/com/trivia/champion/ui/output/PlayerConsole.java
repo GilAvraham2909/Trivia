@@ -1,6 +1,7 @@
 package com.trivia.champion.ui.output;
 
 import com.trivia.champion.IPlayerUi;
+import com.trivia.champion.Player;
 import com.trivia.champion.questions.Question;
 import com.trivia.champion.User;
 
@@ -16,46 +17,6 @@ public class PlayerConsole implements IPlayerUi {
         if (single_instance == null)
             single_instance = new PlayerConsole();
         return single_instance;
-    }
-
-    @Override
-    public void showWelcomePage() {
-        System.out.println("Welcome To TRIVIA CHAMPION!");
-        System.out.println("-------------------------\n");
-        System.out.println("1 - login");
-        System.out.println("2 - register");
-    }
-
-    @Override
-    public void askForUserName() {
-        System.out.println("enter username:");
-    }
-
-    @Override
-    public void askForUserPassword() {
-        System.out.println("enter Password:");
-    }
-
-    @Override
-    public void existingUser() {
-        System.out.println("there is already a user with that username.");
-        System.out.println("-------------------------\n");
-        askForUserName();
-    }
-
-    @Override
-    public void couldNotFindUser() {
-        System.out.println("could not fine a user with that username.");
-        System.out.println("-------------------------\n");
-        System.out.println("1 - try again");
-        System.out.println("2 - register now");
-    }
-
-    @Override
-    public void incorrectPassword() {
-        System.out.println("wrong password password, please try again.");
-        System.out.println("-------------------------\n");
-        askForUserPassword();
     }
 
     @Override
@@ -104,13 +65,13 @@ public class PlayerConsole implements IPlayerUi {
     }
 
     @Override
-    public void scoreBoard(List<User> usersList, int myPlace) {
+    public void scoreBoard(List<Player> usersList, int myPlace) {
         System.out.println("Your Place is: " + myPlace + "\n");
         System.out.println("-------------------------\n");
         System.out.println("TOP 10:");
         int i = 1;
-        for (User user : usersList) {
-            System.out.println((i) + " place: " + user.getName() + " with " + user.getScore());
+        for (Player player : usersList) {
+            System.out.println((i) + " place: " + player.getName() + " with " + player.getScore());
             i++;
         }
         System.out.println("-------------------------\n");
