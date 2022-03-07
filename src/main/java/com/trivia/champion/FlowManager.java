@@ -20,8 +20,7 @@ public class FlowManager {
     private IInputGetter inputGetter = uiAdapter.getUiInput();
     private RoundManager roundManager = new RoundManager();
     private int currentTotalScore;
-    private SqliteDB sql = new SqliteDB();
-    private IDB db = new SqliteAdapter(sql);
+    private IDB db = new SqliteAdapter(new SqliteDB());
     private User user = null;
 
     private static FlowManager single_instance = null;
