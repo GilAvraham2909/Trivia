@@ -17,11 +17,11 @@ import java.util.Objects;
 import static com.trivia.champion.utils.Constants.DEFAULT_UI_TYPE;
 import static com.trivia.champion.utils.Constants.PROPERTY_UI_TYPE;
 
-public class UiAdapter {
+public class UiFactory {
     private int uiType;
-    private static UiAdapter single_instance = null;
+    private static UiFactory single_instance = null;
 
-    private UiAdapter() throws IOException {
+    private UiFactory() throws IOException {
         try {
             uiType = Integer.parseInt(Objects.requireNonNull(AppConfig.loadProperty(PROPERTY_UI_TYPE)));
         } catch (Exception e) {
@@ -29,9 +29,9 @@ public class UiAdapter {
         }
     }
 
-    public static UiAdapter getInstance() throws Exception {
+    public static UiFactory getInstance() throws Exception {
         if (single_instance == null)
-            single_instance = new UiAdapter();
+            single_instance = new UiFactory();
         return single_instance;
     }
 

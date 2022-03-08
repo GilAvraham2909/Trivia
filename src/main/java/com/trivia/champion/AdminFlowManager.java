@@ -2,7 +2,7 @@ package com.trivia.champion;
 
 import com.trivia.champion.enums.GameModes;
 import com.trivia.champion.enums.UiTypes;
-import com.trivia.champion.ui.UiAdapter;
+import com.trivia.champion.ui.UiFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,9 +13,9 @@ import static com.trivia.champion.utils.Constants.*;
 
 public class AdminFlowManager extends FlowManager{
     public boolean quitGame = false;
-    UiAdapter uiAdapter = UiAdapter.getInstance();
-    private IAdminUi display = uiAdapter.getAdminUiOutput();
-    private IInputGetter inputGetter = uiAdapter.getUiInput();
+    UiFactory uiFactory = UiFactory.getInstance();
+    private IAdminUi display = uiFactory.getAdminUiOutput();
+    private IInputGetter inputGetter = uiFactory.getUiInput();
     private Admin admin;
 
     public AdminFlowManager(User user) throws Exception {

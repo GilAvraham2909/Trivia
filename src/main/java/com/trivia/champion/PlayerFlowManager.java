@@ -5,7 +5,7 @@ import com.trivia.champion.db.IDB;
 import com.trivia.champion.db.SqliteAdapter;
 import com.trivia.champion.db.SqliteDB;
 import com.trivia.champion.enums.Difficulty;
-import com.trivia.champion.ui.UiAdapter;
+import com.trivia.champion.ui.UiFactory;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import static com.trivia.champion.utils.Constants.NUM_OF_DIFFICULTY_OPTIONS;
 
 public class PlayerFlowManager extends FlowManager {
     public boolean quitGame = false;
-    UiAdapter uiAdapter = UiAdapter.getInstance();
-    private IPlayerUi display = uiAdapter.getPlayerUiOutput();
-    private IInputGetter inputGetter = uiAdapter.getUiInput();
+    UiFactory uiFactory = UiFactory.getInstance();
+    private IPlayerUi display = uiFactory.getPlayerUiOutput();
+    private IInputGetter inputGetter = uiFactory.getUiInput();
     private RoundManager roundManager = new RoundManager();
     private int currentTotalScore;
     private IDB db = new SqliteAdapter(new SqliteDB());

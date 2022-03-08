@@ -3,7 +3,7 @@ package com.trivia.champion;
 import com.trivia.champion.db.IDB;
 import com.trivia.champion.db.SqliteAdapter;
 import com.trivia.champion.db.SqliteDB;
-import com.trivia.champion.ui.UiAdapter;
+import com.trivia.champion.ui.UiFactory;
 
 import static com.trivia.champion.utils.Constants.NUM_OF_WELCOME_PAGE_OPTIONS;
 
@@ -14,9 +14,9 @@ public class LoginUtility {
 
     public static User login() throws Exception {
         IDB db = new SqliteAdapter(new SqliteDB());
-        UiAdapter uiAdapter = UiAdapter.getInstance();
-        ILoginUi display = uiAdapter.getLoginUiOutput();
-        IInputGetter inputGetter = uiAdapter.getUiInput();
+        UiFactory uiFactory = UiFactory.getInstance();
+        ILoginUi display = uiFactory.getLoginUiOutput();
+        IInputGetter inputGetter = uiFactory.getUiInput();
         display.showWelcomePage();
         int userChoice = inputGetter.getIntFromUser(NUM_OF_WELCOME_PAGE_OPTIONS);
         User user = null;
