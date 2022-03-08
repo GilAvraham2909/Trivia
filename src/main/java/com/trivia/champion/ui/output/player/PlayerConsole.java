@@ -21,12 +21,12 @@ public class PlayerConsole implements IPlayerUi {
     @Override
     public void greetUser(String userName, int userScore) {
         System.out.println("Hi " + userName + "! CURRENT score is: " + userScore);
+        System.out.println("Welcome To TRIVIA CHAMPION!");
+        System.out.println("-------------------------\n");
     }
 
     @Override
     public void showMainMenu(ArrayList<String> categories) {
-        System.out.println("Welcome To TRIVIA CHAMPION!");
-        System.out.println("-------------------------\n");
         System.out.println("Pick a category:");
         System.out.println("-------------------------\n");
         for (int i = 0; i < categories.size(); i++) {
