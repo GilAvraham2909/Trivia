@@ -1,7 +1,6 @@
 package com.trivia.champion.ui.output.player;
 
-import com.trivia.champion.IPlayerUi;
-import com.trivia.champion.Player;
+import com.trivia.champion.users.Player;
 import com.trivia.champion.questions.Question;
 
 import java.util.ArrayList;

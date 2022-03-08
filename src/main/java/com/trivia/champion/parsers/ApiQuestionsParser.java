@@ -2,13 +2,13 @@ package com.trivia.champion.parsers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.trivia.champion.*;
 import com.trivia.champion.categories.ApiCategories;
 import com.trivia.champion.enums.Difficulty;
 import com.trivia.champion.questions.ApiQuestion;
 import com.trivia.champion.questions.Question;
 import com.trivia.champion.questions.QuestionList;
 import com.trivia.champion.questions.QuestionsApiResponse;
+import com.trivia.champion.ui.output.player.IPlayerUi;
 import com.trivia.champion.ui.output.player.PlayerConsole;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class ApiQuestionsParser implements IQuestionsParser {
     }
 
     @Override
-    public QuestionList parse() throws IOException, InterruptedException {
+    public QuestionList parse() throws Exception {
         QuestionList questionList = new QuestionList();
         QuestionsApiResponse questionsApiResponse = getQuestions();
         if (questionsApiResponse.getResults().size() == 0) {
@@ -54,7 +54,7 @@ public class ApiQuestionsParser implements IQuestionsParser {
         return new Question(questionNumber + ". " + question, correctAnswer, incorrectAnswers);
     }
 
-    private QuestionsApiResponse getQuestions() throws IOException, InterruptedException {
+    private QuestionsApiResponse getQuestions() throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .header("accept", "application/json")
@@ -66,14 +66,14 @@ public class ApiQuestionsParser implements IQuestionsParser {
         return mapper.readValue(response.body(), new TypeReference<>() {});
     }
 
-    private String createApiRequest() throws IOException, InterruptedException {
+    private String createApiRequest() throws Exception {
         String amount = "amount=" + NUM_OF_QUESTIONS + "&";
         String category = "category=" + getApiCategoryId() + "&";
         String difficulty = "difficulty=" + getApiDifficulty() + "&";
         return QUESTIONS_API_PREFIX + amount + category + difficulty + QUESTIONS_API_SUFFIX;
     }
 
-    private int getApiCategoryId() throws IOException, InterruptedException {
+    private int getApiCategoryId() throws Exception {
         return new ApiCategories().getCategoryId(category);
     }
 

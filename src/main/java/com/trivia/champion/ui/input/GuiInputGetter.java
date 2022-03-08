@@ -1,7 +1,5 @@
 package com.trivia.champion.ui.input;
 
-import com.trivia.champion.IInputGetter;
-
 import java.util.InputMismatchException;
 
 //NOT IMPLEMENTED

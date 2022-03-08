@@ -1,7 +1,5 @@
 package com.trivia.champion.ui.output.login;
 
-import com.trivia.champion.ILoginUi;
-
 public class LoginConsole implements ILoginUi {
 
     @Override

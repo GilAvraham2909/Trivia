@@ -1,7 +1,7 @@
 package com.trivia.champion.db;
 
-import com.trivia.champion.Player;
-import com.trivia.champion.User;
+import com.trivia.champion.users.Player;
+import com.trivia.champion.users.User;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

@@ -9,8 +9,11 @@ public class ApiCategories extends Categories {
     private List<ApiCategory> apiCategories;
     private ArrayList<String> categories = new ArrayList<>();
 
-    public ApiCategories() throws IOException, InterruptedException {
+    public ApiCategories() throws Exception {
         apiCategories = categoriesApiParser.parse();
+        if (apiCategories == null) {
+            return;
+        }
         for (ApiCategory apiCategory : apiCategories) {
             categories.add(apiCategory.getName());
         }

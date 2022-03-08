@@ -1,8 +1,8 @@
 package com.trivia.champion.db;
 
 
-import com.trivia.champion.Player;
-import com.trivia.champion.User;
+import com.trivia.champion.users.Player;
+import com.trivia.champion.users.User;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -12,11 +12,6 @@ public class SqliteAdapter implements IDB {
 
     public SqliteAdapter(SqliteDB sqliteDb) {
         this.sqliteDb = sqliteDb;
-    }
-
-    @Override
-    public void createDB() throws Exception {
-        this.sqliteDb.createDB();
     }
 
     @Override
@@ -32,6 +27,11 @@ public class SqliteAdapter implements IDB {
     @Override
     public boolean validateUser(@NotNull User user, String givenPass) throws Exception {
         return this.sqliteDb.validateUser(user, givenPass);
+    }
+
+    @Override
+    public void createDB() throws Exception {
+        this.sqliteDb.createDB();
     }
 
     @Override

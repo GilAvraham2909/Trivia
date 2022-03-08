@@ -1,7 +1,5 @@
 package com.trivia.champion.ui.output.admin;
 
-import com.trivia.champion.IAdminUi;
-
 import java.util.List;
 
 // NOT IMPLEMENTED

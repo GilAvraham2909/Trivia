@@ -1,8 +1,8 @@
 package com.trivia.champion.db;
 
-import com.trivia.champion.Player;
-import com.trivia.champion.User;
-import com.trivia.champion.UserFactory;
+import com.trivia.champion.users.Player;
+import com.trivia.champion.users.User;
+import com.trivia.champion.factories.UserFactory;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;

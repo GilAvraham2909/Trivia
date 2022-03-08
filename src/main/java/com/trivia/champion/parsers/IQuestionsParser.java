@@ -5,5 +5,5 @@ import com.trivia.champion.questions.QuestionList;
 import java.io.IOException;
 
 public interface IQuestionsParser {
-    QuestionList parse() throws IOException, InterruptedException;
+    QuestionList parse() throws Exception;
 }

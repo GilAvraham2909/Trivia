@@ -1,19 +1,20 @@
 package com.trivia.champion.db;
 
-import com.trivia.champion.Player;
-import com.trivia.champion.User;
+import com.trivia.champion.users.Player;
+import com.trivia.champion.users.User;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public interface IDB {
-    void createDB() throws Exception;
 
     User getUserFromDB(String givenName) throws Exception;
 
     int getPlayerScore(String givenName) throws Exception;
 
     boolean validateUser(@NotNull User user, String givenPass) throws Exception;
+
+    void createDB() throws Exception;
 
     User addToDB(String givenName, String givenPass) throws Exception;
 
