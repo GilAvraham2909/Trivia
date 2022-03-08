@@ -1,7 +1,8 @@
 package com.trivia.champion;
 
-import com.trivia.champion.db.DbAdapter;
 import com.trivia.champion.db.IDB;
+import com.trivia.champion.db.SqliteAdapter;
+import com.trivia.champion.db.SqliteDB;
 import com.trivia.champion.ui.UiAdapter;
 
 import static com.trivia.champion.utils.Constants.NUM_OF_WELCOME_PAGE_OPTIONS;
@@ -12,8 +13,7 @@ public class LoginUtility {
     }
 
     public static User login() throws Exception {
-        DbAdapter dbAdapter = DbAdapter.getInstance();
-        IDB db = dbAdapter.getDb();
+        IDB db = new SqliteAdapter(new SqliteDB());
         UiAdapter uiAdapter = UiAdapter.getInstance();
         ILoginUi display = uiAdapter.getLoginUiOutput();
         IInputGetter inputGetter = uiAdapter.getUiInput();

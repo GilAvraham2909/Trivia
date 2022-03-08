@@ -1,6 +1,5 @@
 package com.trivia.champion;
 
-import com.trivia.champion.enums.DbTypes;
 import com.trivia.champion.enums.GameModes;
 import com.trivia.champion.enums.UiTypes;
 import com.trivia.champion.ui.UiAdapter;

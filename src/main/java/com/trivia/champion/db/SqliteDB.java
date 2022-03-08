@@ -40,7 +40,6 @@ public class SqliteDB {
         return userFactory.createUser(name, pass, type);
     }
 
-    @Override
     public int getPlayerScore(String givenName) throws SQLException {
         String sql = "SELECT * FROM users WHERE name='" + givenName + "'";
         Statement statement = this.connection.createStatement();
@@ -97,7 +96,6 @@ public class SqliteDB {
         return playerList;
     }
 
-    @Override
     public void closeConnection() throws Exception {
         this.connection.close();
     }

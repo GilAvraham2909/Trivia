@@ -1,12 +1,12 @@
 package com.trivia.champion;
 
 import com.trivia.champion.categories.Categories;
-import com.trivia.champion.db.DbAdapter;
 import com.trivia.champion.db.IDB;
+import com.trivia.champion.db.SqliteAdapter;
+import com.trivia.champion.db.SqliteDB;
 import com.trivia.champion.enums.Difficulty;
 import com.trivia.champion.ui.UiAdapter;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.trivia.champion.utils.Constants.NUM_OF_DIFFICULTY_OPTIONS;
@@ -18,8 +18,7 @@ public class PlayerFlowManager extends FlowManager {
     private IInputGetter inputGetter = uiAdapter.getUiInput();
     private RoundManager roundManager = new RoundManager();
     private int currentTotalScore;
-    private DbAdapter dbAdapter = DbAdapter.getInstance();
-    private IDB db = dbAdapter.getDb();
+    private IDB db = new SqliteAdapter(new SqliteDB());
     private Player player;
 
     public PlayerFlowManager(User user) throws Exception {
@@ -40,9 +39,7 @@ public class PlayerFlowManager extends FlowManager {
             }
             Difficulty difficulty = getDifficulty(category);
             if (difficulty == null) {
-                quitGame = true;
-                db.closeConnection();
-                return;
+                continue;
             }
             gameManagement(category, difficulty, player);
         }
