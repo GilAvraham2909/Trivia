@@ -1,14 +1,16 @@
 package com.trivia.champion.db;
 
 
+import com.trivia.champion.Player;
 import com.trivia.champion.User;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class SqliteAdapter implements IDB {
     private SqliteDB sqliteDb;
 
-    public SqliteAdapter (SqliteDB sqliteDb){
+    public SqliteAdapter(SqliteDB sqliteDb) {
         this.sqliteDb = sqliteDb;
     }
 
@@ -19,26 +21,36 @@ public class SqliteAdapter implements IDB {
 
     @Override
     public User getUserFromDB(String givenName) throws Exception {
-        return sqliteDb.getUserFromDB(givenName);
+        return this.sqliteDb.getUserFromDB(givenName);
+    }
+
+    @Override
+    public int getPlayerScore(String givenName) throws Exception {
+        return sqliteDb.getPlayerScore(givenName);
     }
 
     @Override
     public boolean validateUser(@NotNull User user, String givenPass) throws Exception {
-        return  this.sqliteDb.validateUser(user,givenPass);
+        return this.sqliteDb.validateUser(user, givenPass);
     }
 
     @Override
     public User addToDB(String givenName, String givenPass) throws Exception {
-        return  this.sqliteDb.addToDB(givenName,givenPass);
+        return this.sqliteDb.addToDB(givenName, givenPass);
     }
 
     @Override
-    public int updateScore(@NotNull User user, int gameScore) throws Exception {
-        return  this.sqliteDb.updateScore(user,gameScore);
+    public int updateScore(@NotNull Player player, int gameScore) throws Exception {
+        return this.sqliteDb.updateScore(player,gameScore);
     }
 
     @Override
-    public List<User> scoreBoard() throws Exception {
-        return  this.sqliteDb.scoreBoard();
+    public List<Player> scoreBoard() throws Exception {
+        return this.sqliteDb.scoreBoard();
+    }
+
+    @Override
+    public void closeConnection() throws Exception {
+        this.sqliteDb.closeConnection();
     }
 }

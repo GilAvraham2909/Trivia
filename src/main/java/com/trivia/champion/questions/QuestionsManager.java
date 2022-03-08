@@ -1,8 +1,7 @@
 package com.trivia.champion.questions;
 
-import com.trivia.champion.GameModeAdapter;
+import com.trivia.champion.GameModeFactory;
 import com.trivia.champion.enums.Difficulty;
-import com.trivia.champion.parsers.ApiQuestionsParser;
 import com.trivia.champion.parsers.IQuestionsParser;
 
 import java.io.IOException;
@@ -16,8 +15,8 @@ public class QuestionsManager {
     public QuestionsManager(String category, Difficulty difficulty) throws Exception {
         this.category = category;
         this.difficulty = difficulty;
-        GameModeAdapter gameModeAdapter = GameModeAdapter.getInstance();
-        parser = gameModeAdapter.getQuestionsParser(category, difficulty);
+        GameModeFactory gameModeFactory = GameModeFactory.getInstance();
+        parser = gameModeFactory.getQuestionsParser(category, difficulty);
         questionsList = initializeQuestions();
     }
 

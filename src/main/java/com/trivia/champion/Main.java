@@ -1,16 +1,12 @@
 package com.trivia.champion;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 public class Main {
 
     public static void main(String[] args) throws Exception  //static method
     {
-        FlowManager flowManager = FlowManager.getInstance();
+        User user = LoginUtility.login();
+        FlowManagerFactory flowManagerFactory = new FlowManagerFactory();
+        FlowManager flowManager = flowManagerFactory.getFlowManager(user);
         flowManager.start();
-//        while (!flowManager.gameFinished) {
-//
-//        }
     }
 }

@@ -6,18 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface IPlayerUi {
-    void showWelcomePage();
-
-    void askForUserName();
-
-    void askForUserPassword();
-
-    void existingUser();
-
-    void couldNotFindUser();
-
-    void incorrectPassword();
-
     void greetUser(String userName, int userScore);
 
     void showTotalScore(int totalScore);
@@ -34,5 +22,5 @@ public interface IPlayerUi {
 
     void showTotalRoundScore(int totalRoundScore);
 
-    void scoreBoard(List<User> top10Users, int myPlace);
+    void scoreBoard(List<Player> top10Users, int myPlace);
 }

@@ -28,9 +28,4 @@ public class AppConfig {
         }
     }
 
-
-    public static <T> int indexOf(T[] arr, T val) {
-        return Arrays.asList(arr).indexOf(val);
-    }
-
 }

@@ -4,20 +4,17 @@ import com.trivia.champion.enums.Difficulty;
 import com.trivia.champion.questions.Question;
 import com.trivia.champion.questions.QuestionsManager;
 import com.trivia.champion.ui.UiAdapter;
-import com.trivia.champion.ui.input.ConsoleInputGetter;
-import com.trivia.champion.ui.output.PlayerConsole;
-
-import java.io.IOException;
+import com.trivia.champion.ui.output.player.PlayerConsole;
 
 import static com.trivia.champion.utils.Constants.NUM_OF_OPTIONAL_ANSWERS;
 import static com.trivia.champion.utils.Constants.NUM_OF_QUESTIONS;
 
 public class RoundManager {
     private final IPlayerUi display = PlayerConsole.getInstance();
-    private final UiAdapter uiAdapter = new UiAdapter();
+    private final UiAdapter uiAdapter = UiAdapter.getInstance();
     private final IInputGetter inputGetter = uiAdapter.getUiInput();
 
-    public RoundManager() throws IOException {}
+    public RoundManager() throws Exception {}
 
     public int startRound(String category, Difficulty difficulty) throws Exception {
         QuestionsManager questionsManager = new QuestionsManager(category, difficulty);
